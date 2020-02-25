@@ -13,23 +13,21 @@
         require("navbar.php")
         
     ?>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <div class="code-box">
-            <form action="javascript:alert('success')" id="code-form" method="GET">
-                <p>
-                    <label>Code:</label>
-                    <input type="text" id="hash" name="hash" >
-                </p>
-                <p>
-                    <input type="submit" id="btn" value="Go">
-                </p>     
-                     
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Code:</label>
+                    <input type="text" class="form-control" name="hash" id="hash" aria-describedby="emailHelp" placeholder="Enter code here">
+                    <small id="emailHelp" class="form-text text-muted">A Szavazó lapkán található kódot írd be ide, vagy olvasd be a QR code-ot!</small>
+                </div>
+                <input type="submit" class="btn btn-primary" id="btn" value="Submit">
+                
             </form>
-          
+            
     </div>
     <?php 
-   
-        if ($submitted == "true"){
+        if (isset($_GET['hash'])) {
             function html_escape($html_escape) {
                 $html_escape =  htmlspecialchars($html_escape, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 return $html_escape;
@@ -47,12 +45,19 @@
     
             if ($row['hash'] == NULL)
             {
-                echo "nyet";
+                echo "<script>Swal.fire({",
+                    "icon: 'error',",
+                    "title: 'Hibás Kód',",
+                    "text: 'Nem létező, vagy egyszer már ferlhasznált kódot ütöttél be!',",
+                  "});</script>";
             } elseif ($row['hash'] == $hash) {
                 echo "Szavazz!";
                 
             }
         }
+            
+
+        
 
        
 

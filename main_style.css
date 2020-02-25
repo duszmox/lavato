@@ -2,8 +2,9 @@
     font-family: LeafyStencil;
 }
 .code-box {
-    width: 15%;
     margin-left: auto;
     margin-right: auto;
-    padding: 1vw;
+    width: 60vw;
+    margin-top: 3vw;
 }
+ 
