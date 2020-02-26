@@ -15,6 +15,15 @@
         require("navbar.php")
     ?>
 
+    <div class="container main-container">
+        <div class="conatiner-title">
+            <br>
+            <h1 align="center" class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
+        </div>
+        <div class="container-body">
+        
+        </div>
+    </div>
    
 
 

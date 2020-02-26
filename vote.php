@@ -3,7 +3,6 @@
 require_once("connect.php");
 require_once("snippets.php");
 display_errors();
-$codeStyle = 'style="" ';
 ?>
 <html>
 
@@ -44,19 +43,21 @@ $codeStyle = 'style="" ';
         var_dump($result);
 
         if ($result['hash'] == NULL) {
-    ?>
-    
-    <?php
+            echo '<script> notRealCode(); </script>';
+            ?>
+            <script>visibleForm();</script>
+            <?php
         } elseif ($result['hash'] == $hash) {
     ?>
     <script type="text/javascript">
         window.setTimeout(hideForm, 2);
+        voteInfo();
     </script>
     <div id="main">
-        <div class="choose-class-A">A</div>
-        <div class="choose-class-B">B</div>
-        <div class="choose-class-C">C</div>
-        <div class="choose-class-D">D</div>
+        <div class="choose-class-A"><p class="choose-class-text">A</p></div>
+        <div class="choose-class-B"><p class="choose-class-text">B</p></div>
+        <div class="choose-class-C"><p class="choose-class-text">C</p></div>
+        <div class="choose-class-D"><p class="choose-class-text">D</p></div>
     </div>
     <?php
             }
@@ -66,7 +67,7 @@ $codeStyle = 'style="" ';
             <form id="code-form" style="display: ;">
                 <div class="form-group" id="form-group">
                     <label for="exampleInputEmail1">Code:</label>
-                    <input type="text" class="form-control" name="hash" id="hash" aria-describedby="emailHelp" placeholder="Enter code here">
+                    <input type="text" class="form-control" name="hash" id="hash" placeholder="Enter code here" onkeyup="this.value = this.value.toLowerCase();">
                     <small id="emailHelp" class="form-text text-muted">A Szavazó lapkán található kódot írd be ide, vagy olvasd be a QR code-ot!</small>
                 </div>
                 <input type="submit" class="btn btn-primary" id="btn" value="Submit">
