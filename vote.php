@@ -1,3 +1,6 @@
+<?php 
+$codeStyle = 'style="" ';
+?>
 <html>
     <head>
     
@@ -14,7 +17,7 @@
         
     ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <div class="code-box">
+    <div <?php echo $codeStyle; ?> class="code-box">
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Code:</label>
@@ -52,6 +55,7 @@
                   "});</script>";
             } elseif ($row['hash'] == $hash) {
                 echo "Szavazz!";
+                $codeStyle = 'style="display: none;" ';
                 
             }
         }
