@@ -7,4 +7,61 @@
     width: 60vw;
     margin-top: 3vw;
 }
- 
+.choose-class-A {
+    position: absolute;
+    top: 0; left: 0;
+    right: 50%; bottom: 50%;
+    /* display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 13vw; */
+    background-color: aqua;
+}
+.choose-class-B {
+    position: absolute;
+    top: 0; right: 0;
+    left: 50%; bottom: 50%;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 13vw;
+    background-color: red;
+}
+.choose-class-C {
+    position: absolute;
+    bottom: 0; left: 0;
+    top: 50%; right: 50%;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 13vw;
+    background-color: lightgreen;
+
+}
+.choose-class-D {
+    position: absolute;
+    bottom: 0; right: 0;
+    top: 50%; left: 50%;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 13vw;
+    background-color: yellowgreen;
+
+}
+/* .choose-class-div-top {
+    margin-bottom: 26.5vw;
+    margin-top: 19vw;
+
+}
+.choose-class-div-bottom {
+margin-left: 1px;
+} */
+body {
+    display: flex;
+    flex-direction: column;
+}
+#main {
+    flex: 1 1 auto;
+    position: relative;
+}
