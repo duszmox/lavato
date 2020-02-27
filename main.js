@@ -27,3 +27,27 @@ function notRealCode() {
 function visibleForm() {
     document.getElementById("code-form").style.display="";
 };
+
+function confirmVote(i, cond=false) {
+  z = (cond==true) ? "z" : "";
+  Swal.fire({
+    title: 'Biztos a'+z+' '+(i)+' osztályra szeretnél szavazni?',
+    text: "Választásodat nem tudod majd visszavonni!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: "Nem, mégsem",
+    confirmButtonText: 'Igen, biztos'
+  }).then((result) => { 
+    if (result.value) {
+      Swal.fire(
+        'Sikeres szavazás!',
+        'Szavazatod elmenésre került!',
+        'success'
+      )
+
+
+    }
+  })
+}
