@@ -19,6 +19,9 @@
         <div class="conatiner-title">
             <br>
             <h1 align="center" class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
+            <hr>
+            
+
         </div>
         <div class="container-body">
         
