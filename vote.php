@@ -31,10 +31,7 @@ display_errors();
 
 <body class="bg">
 
-<?php
-require("navbar.php")
 
-?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <?php
 if (isset($_GET['hash'])) {
@@ -55,19 +52,25 @@ if ($result['hash'] == NULL) {
 <?php
 } elseif ($result['hash'] == $hash) {
 ?>
+
     <script type="text/javascript">
         window.setTimeout(hideForm, 2);
         voteInfo();
     </script>
     <div id="main">
         <div class="choose-class-A" onclick="confirmVote(this.textContent, true)"><p class="choose-class-text">A</p></div>
-        <div class="choose-class-B" onclick="confirmVote(this.textContent)"><p class="choose-class-text">B</p></div>
-        <div class="choose-class-C" onclick="confirmVote(this.textContent)"><p class="choose-class-text">C</p></div>
-        <div class="choose-class-D" onclick="confirmVote(this.textContent)"><p class="choose-class-text">D</p></div>
+        <div class="choose-class-B" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">B</p></div>
+        <div class="choose-class-C" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">C</p></div>
+        <div class="choose-class-D" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">D</p></div>
     </div>
 <?php
 }
 } else {
+?>
+
+<?php
+require("navbar.php")
+
 ?>
     <div class="code-box">
         <form id="code-form" style="display: ;">
