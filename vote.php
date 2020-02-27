@@ -54,10 +54,10 @@ display_errors();
         voteInfo();
     </script>
     <div id="main">
-        <div class="choose-class-A"><p class="choose-class-text">A</p></div>
-        <div class="choose-class-B"><p class="choose-class-text">B</p></div>
-        <div class="choose-class-C"><p class="choose-class-text">C</p></div>
-        <div class="choose-class-D"><p class="choose-class-text">D</p></div>
+        <div class="choose-class-A" onclick="confirmVote(this.textContent, true)"><p class="choose-class-text">A</p></div>
+        <div class="choose-class-B" onclick="confirmVote(this.textContent)"><p class="choose-class-text">B</p></div>
+        <div class="choose-class-C" onclick="confirmVote(this.textContent)"><p class="choose-class-text">C</p></div>
+        <div class="choose-class-D" onclick="confirmVote(this.textContent)"><p class="choose-class-text">D</p></div>
     </div>
     <?php
             }
