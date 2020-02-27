@@ -73,3 +73,14 @@ body {
         
  }
 }
+p {
+    word-break: normal;
+}
+.container-body {
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+.container-title {
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
