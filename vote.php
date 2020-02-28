@@ -30,10 +30,7 @@ display_errors();
 
 <body class="bg">
 
-<?php
-require("navbar.php")
 
-?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <?php
 if (isset($_GET['hash'])) {
@@ -67,6 +64,9 @@ if ($result['hash'] == NULL) {
 <?php
 }
 } else {
+
+require("navbar.php")
+
 ?>
     <div class="code-box">
         <form id="code-form" style="display: ;">
