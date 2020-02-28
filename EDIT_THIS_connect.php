@@ -1,4 +1,5 @@
 <?php
+//to use edit the parameters and rename the file to connect.php
        $servername = "host";
        $username = "username";
        $password = "password";
