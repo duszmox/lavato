@@ -45,9 +45,14 @@ function confirmVote(i, cond=false, hash) {
         'Sikeres szavazás!',
         'Szavazatod elmenésre került!',
         'success'
+<<<<<<< HEAD
       ).then((result) => {
             window.location.href = "/lavato/upload_vote.php?hash=" + hash + "&class=" + i;
         });
+=======
+      );
+document.location.href = ""
+>>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
 
     }
   })

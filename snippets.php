@@ -25,6 +25,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 }
 function verify_hash($conn,$hash){
+<<<<<<< HEAD
     $sql = "SELECT * FROM lavato_keys WHERE hash = '$hash'";
     echo  $sql;
     $row = mysqli_query($conn, $sql);
@@ -52,5 +53,17 @@ function log_action($action, $value){
 function upload_vote($class){
      $sql = "";
      echo "you voted for class " . $class;
+=======
+    $sql = "SELECT * FROM lavato_keys WHERE 'hash' = '$hash'";
+    $row = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($row) >0){
+        swal_error("yolooooo");
+    }else{
+        swal_error("nem");
+    }
+}
+function upload_vote($hash, $class){
+     $sql = "";
+>>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
 }
         ?>
