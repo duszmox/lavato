@@ -5,6 +5,7 @@ function voteInfo() {
         'info'
       )
 }
+
 function notRealCode() {
     Swal.fire({
         title: 'Nem létező kódot próbálsz használni!',
