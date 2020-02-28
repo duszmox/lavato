@@ -16,7 +16,7 @@
     ?>
 
     <div class="container main-container">
-        <div class="conatiner-title">
+        <div class="container-title">
             <br>
             <h1 align="center" class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
             <hr>
@@ -24,7 +24,7 @@
 
         </div>
         <div class="container-body">
-        
+            <p>A Fazekas Lúdavató rendszere a 2020-as eseménytől kezdve elektronikusan fog működni. Erre több indokból került sor, először is azért, hogy iskolánk haladjon a korral, modernizálódjuk, másrészt pedig azért is hogy így lecsökkentsük vagy teljesen megszüntessük a csalásokat.</p>
         </div>
     </div>
    
