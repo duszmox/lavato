@@ -1,6 +1,3 @@
-function hideForm() {
-    document.getElementById("code-form").style.display="none";
-};
 function voteInfo() {
     Swal.fire(
         'Válassz osztályt!',
@@ -51,3 +48,5 @@ document.location.href = ""
     }
   })
 }
+
+
