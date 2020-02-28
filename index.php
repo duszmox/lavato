@@ -1,13 +1,10 @@
-<?php 
+<?php
+require_once("snippets.php");
 ?>
 <html>
     <head>
     
-    <link rel="stylesheet" href="main_style.css">
-    <link rel="stylesheet" href="assets/fonts/leaves/stylesheet.css">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/js/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <title>Lavató</title>
     </head>
 <body class="bg">
