@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="393ac448-37df-442e-9c6c-84fc574f769c" name="DuszmoFazekas" url="http://sftp.fazekas.hu">
+        <fileTransfer host="sftp.fazekas.hu" port="22" rootFolder="/home/duszmo/www/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
