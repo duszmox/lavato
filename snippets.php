@@ -6,12 +6,12 @@ function html_escape($html_escape){
     return $html_escape;
 }
 
-function swal_error($text)
+function swal_error($title,$text)
 {
     echo "<script>
     Swal.fire({
         icon: 'error',
-        title: 'Hibás Kód',
+        title: '$title',
         text: '$text',
     });
 </script>";
@@ -126,5 +126,61 @@ function hasBeenActivated($hash) {
         return false;
     }
 }
+function validate_user($username, $password){
+    global $conn;
+    $sql = "SELECT * FROM lavato_users WHERE username='$username'";
+    $row = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($row) == 1)
+    {
+        $result = mysqli_fetch_assoc($row);
+        if($result['password'] == hash("sha256", $password)){
+
+            return true;
+
+        }
+    } else {
+        return false;
+    }
+}
+function get_userdata($username){
+    global $conn;
+    return mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM lavato_users WHERE username='$username'"));
+}
+function login_user($username){
+    log_action("login", $username);
+    $userdata = get_userdata($username);
+
+    $_SESSION['username'] = $username;
+    $_SESSION['admin'] = $userdata["admin"];
+    $_SESSION['logged_in'] = 1;
+
+    return true;
+}
+function logout_user($username){
+    log_action("logout", $username);
+
+    $_SESSION['username'] = "";
+    $_SESSION['admin'] = "";
+    $_SESSION['logged_in'] = 0;
+}
+function user_logged_in(){
+    return $_SESSION['logged_in'];
+}
+function is_admin(){
+    return $_SESSION['admin'];
+}
+function register_user($username, $password){
+    if(!can_register()){return false;}
+    global $conn;
+    if(!empty(get_userdata($username))){
+        echo "Már foglalt felhaszálónév";
+        return false;
+    }
+    $sql = "INSERT INTO lavato_users (username, password) VALUES ('$username', '".hash("sha256", $password)."')";
+    echo $sql;
+    log_action("register_user", $username);
+    return mysqli_query($conn, $sql);
+}
+
 
 ?>
