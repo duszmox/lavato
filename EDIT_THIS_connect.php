@@ -1,8 +1,8 @@
 <?php
-       $servername = "localhost";
-       $username = "duszmo";
-       $password = "ThanosPapa9?";
-       $db = "duszmo";
+       $servername = "host";
+       $username = "username";
+       $password = "password";
+       $db = "db";
 // Create connection
 
     global $conn;
