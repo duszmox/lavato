@@ -1,15 +1,23 @@
 <?php
 //to use edit the parameters and rename the file to connect.php
-       $servername = "host";
-       $username = "username";
-       $password = "password";
-       $db = "db";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "lavato";
 // Create connection
-
-    global $conn;
-    $conn = new mysqli($servername, $username, $password, $db);
+session_start();
+if (!isset($_SESSION['username']) || $_SESSION['username'] == "") {
+    $_SESSION['username'] = "";
+    $_SESSION['admin'] = "";
+    $_SESSION['logged_in'] = 0;
+}
+function can_register(){
+    return false;
+}
+global $conn;
+$conn = new mysqli($servername, $username, $password, $db);
 // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
