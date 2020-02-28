@@ -1,5 +1,4 @@
 <?php
-
 require_once("connect.php");
 require_once("snippets.php");
 display_errors();
@@ -45,16 +44,15 @@ if (isset($_GET['hash'])) {
 
     $result = mysqli_fetch_array($raw);
     echo '<pre>' . var_export($result['hash'], true) . '</pre>';
-if ($result['hash'] == NULL) {
-    echo '<script> notRealCode(); </script>';
-    ?>
-    <script>visibleForm();</script>
+if ($result['hash'] == !$hash) {
+?>
+    <script> notRealCode(); </script>
 <?php
 } elseif ($result['hash'] == $hash) {
 ?>
 
     <script type="text/javascript">
-        window.setTimeout(hideForm, 2);
+        hideForm()
         voteInfo();
     </script>
     <div id="main">
