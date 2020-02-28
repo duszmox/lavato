@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
-require_once("connect.php");
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
 require_once("snippets.php");
 display_errors();
 ?>
@@ -34,7 +30,6 @@ display_errors();
 
 <body class="bg">
 
-<<<<<<< HEAD
 <?php
 require("navbar.php")
 
@@ -59,58 +54,20 @@ if ($result['hash'] == NULL) {
 <?php
 } elseif ($result['hash'] == $hash) {
 ?>
-=======
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<?php
-if (isset($_GET['hash'])) {
-
-    $hash = html_escape($_GET['hash']);
-
-
-    $sql = "SELECT * FROM lavato_keys WHERE hash= '$hash'";
-
-    $raw = mysqli_query($conn, $sql);
-
-    $result = mysqli_fetch_array($raw);
-    echo '<pre>' . var_export($result['hash'], true) . '</pre>';
-if ($result['hash'] == !$hash) {
-?>
-    <script> notRealCode(); </script>
-<?php
-} elseif ($result['hash'] == $hash) {
-?>
-
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
     <script type="text/javascript">
-        hideForm()
+        window.setTimeout(hideForm, 2);
         voteInfo();
     </script>
     <div id="main">
-<<<<<<< HEAD
         <div class="choose-class-A" onclick="confirmVote(this.textContent, true, '<?php echo $hash;?>')"><p class="choose-class-text">A</p></div>
         <div class="choose-class-B" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">B</p></div>
         <div class="choose-class-C" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">C</p></div>
         <div class="choose-class-D" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">D</p></div>
-=======
-        <div class="choose-class-A" onclick="confirmVote(this.textContent, true)"><p class="choose-class-text">A</p></div>
-        <div class="choose-class-B" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">B</p></div>
-        <div class="choose-class-C" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">C</p></div>
-        <div class="choose-class-D" onclick="confirmVote(this.textContent, false)"><p class="choose-class-text">D</p></div>
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
     </div>
 <?php
 }
 } else {
 ?>
-<<<<<<< HEAD
-=======
-
-<?php
-require("navbar.php")
-
-?>
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
     <div class="code-box">
         <form id="code-form" style="display: ;">
             <div class="form-group" id="form-group">
