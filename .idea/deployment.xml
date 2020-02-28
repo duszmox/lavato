@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
   <component name="PublishConfigData" serverName="DuszmoFazekas">
-=======
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="DuszmoFazekas" autoUploadExternalChanges="true">
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
     <serverData>
       <paths name="DuszmoFazekas">
         <serverdata>
@@ -14,9 +10,5 @@
         </serverdata>
       </paths>
     </serverData>
-<<<<<<< HEAD
-=======
-    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
->>>>>>> e3b0459eb6c321d48a919af2aae971b99370940e
   </component>
 </project>
