@@ -2,6 +2,7 @@
 
 require_once("snippets.php");
 display_errors();
+
 ?>
 <html>
 
@@ -38,18 +39,13 @@ if (isset($_GET['hash'])) {
     $hash = html_escape($_GET['hash']);
 
 
-    $sql = "SELECT * FROM lavato_keys WHERE hash= '$hash'";
 
-    $raw = mysqli_query($conn, $sql);
-
-    $result = mysqli_fetch_array($raw);
-    echo '<pre>' . var_export($result['hash'], true) . '</pre>';
-if ($result['hash'] == NULL) {
+if (!verify_hash($hash)) {
     echo '<script> notRealCode(); </script>';
     ?>
     <script>visibleForm();</script>
 <?php
-} elseif ($result['hash'] == $hash) {
+} elseif (verify_hash($hash)) {
 ?>
     <script type="text/javascript">
         window.setTimeout(hideForm, 2);
@@ -57,9 +53,9 @@ if ($result['hash'] == NULL) {
     </script>
     <div id="main">
         <div class="choose-class-A" onclick="confirmVote(this.textContent, true, '<?php echo $hash;?>')"><p class="choose-class-text">A</p></div>
-        <div class="choose-class-B" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">B</p></div>
-        <div class="choose-class-C" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">C</p></div>
-        <div class="choose-class-D" onclick="confirmVote(this.textContent, , '<?php echo $hash;?>')"><p class="choose-class-text">D</p></div>
+        <div class="choose-class-B" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">B</p></div>
+        <div class="choose-class-C" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">C</p></div>
+        <div class="choose-class-D" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">D</p></div>
     </div>
 <?php
 }
@@ -83,6 +79,16 @@ require("navbar.php")
     </div>
     <?php
 }
+
+
+if(isset($_GET['vote'])){
+    if($_GET['vote'] == 1){
+        ?>
+        <script>
+            successfulVote();
+        </script>
+        <?php
+    }}
 ?>
 
 
