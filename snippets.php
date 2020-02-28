@@ -1,11 +1,7 @@
 <?php
 require_once("connect.php");
 
-//todo nem tudom elérni a $conn var-t és ezt meg kéne tudni csinálni
-
-function html_escape($html_escape)
-
-{
+function html_escape($html_escape){
     $html_escape = htmlspecialchars($html_escape, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     return $html_escape;
 }
@@ -31,7 +27,7 @@ function display_errors()
 function verify_hash($hash)
 {
     global $conn;
-    $sql = "SELECT * FROM lavato_keys WHERE hash = '$hash' AND hasBeenActivated=false";
+    $sql = "SELECT * FROM lavato_keys WHERE hash = '$hash'";
     $row = mysqli_query($conn, $sql);
     if (mysqli_num_rows($row) == 1)
     {
@@ -54,7 +50,7 @@ function verify_class($class)
 function disable_hash($hash)
 {
     global $conn;
-    $sql = "UPDATE lavato_keys SET hasBeenActivated=true WHERE hash='$hash'";
+    $sql = "UPDATE lavato_keys SET hasBeenActivated=1 WHERE hash='$hash'";
     return mysqli_query($conn, $sql);
 }
 
@@ -104,6 +100,8 @@ function get_class_votes(){
 
     return $class_data;
 }
+
+
 function create_random_data($max, $hasBeenActivated){
     global $conn;
     $classes = array("A","B","C","D");
@@ -112,6 +110,21 @@ function create_random_data($max, $hasBeenActivated){
         $hash = bin2hex(random_bytes(32));
         $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated,class) VALUES ('$hash', '$hasBeenActivated' ,'$classes[$class]')";
         mysqli_query($conn, $sql);
+        //todo ellenorize, hogy van-e mar ilyen hash
     }
 }
+
+function hasBeenActivated($hash) {
+    global $conn;
+    $sql = "SELECT * FROM lavato_keys WHERE hash='$hash' AND hasBeenActivated=0";
+    $row = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($row) == 1)
+    {
+        log_action("hash_activated", "$hash _activated");
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>
