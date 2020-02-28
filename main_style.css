@@ -7,41 +7,55 @@
     width: 60vw;
     margin-top: 3vw;
 }
-.choose-class-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    color: white;
-    font-size: 20vw;
+@media (min-width:600px) {
+    .choose-class-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        color: white;
+        font-size: 10vw;
+}
+}
+@media (max-width:600px) {
+    .choose-class-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        color: white;
+        font-size: 20vw;
+}
 }
 .choose-class-A {
     position: absolute;
     top: 0; left: 0;
     right: 50%; bottom: 50%;
-    background-color: aqua;
+    background-color: #ffdd33;
     
 }
 .choose-class-B {
     position: absolute;
     top: 0; right: 0;
     left: 50%; bottom: 50%;
-    background-color: red;
+    background-color:#1368ce;
 }
 .choose-class-C {
     position: absolute;
     bottom: 0; left: 0;
     top: 50%; right: 50%;
-    background-color: lightgreen;
+    background-color: #26890c;
 
 }
 .choose-class-D {
     position: absolute;
     bottom: 0; right: 0;
     top: 50%; left: 50%;
-    background-color: yellowgreen;
+    background-color: #ff3355;
 
 }
 body {
