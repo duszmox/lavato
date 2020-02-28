@@ -42,8 +42,8 @@ function confirmVote(i, cond=false) {
         'Sikeres szavazás!',
         'Szavazatod elmenésre került!',
         'success'
-      );
-document.location.href = ""
+      )
+
 
     }
   })
