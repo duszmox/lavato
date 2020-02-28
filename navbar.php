@@ -6,7 +6,11 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
+<<<<<<< HEAD
+        <a class="nav-link" href="index.php">Főoldal <span class="sr-only">(current)</span></a>
+=======
         <a class="nav-link" href="http://duszmo.f.fazekas.hu/lavato/">Főoldal <span class="sr-only">(current)</span></a>
+>>>>>>> 368a1350f0b2ce39ee113b940063257ab84f5fd6
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="vote.php" >Szavazás<span class="sr-only">(current)</span></a>
