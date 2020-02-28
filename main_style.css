@@ -81,7 +81,7 @@ body {
  }
  @media (max-width:600px) {
     .container-title-h1 {
-        margin-top: 2vw;
+        margin-top: 5vw;
         font-size: 8vw;
         word-break: normal;
         
