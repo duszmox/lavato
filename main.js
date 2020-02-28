@@ -25,7 +25,7 @@ function visibleForm() {
     document.getElementById("code-form").style.display="";
 };
 
-function confirmVote(i, cond=false) {
+function confirmVote(i, cond=false, hash) {
   z = (cond==true) ? "z" : "";
   Swal.fire({
     title: 'Biztos a'+z+' '+(i)+' osztályra szeretnél szavazni?',
@@ -36,14 +36,15 @@ function confirmVote(i, cond=false) {
     cancelButtonColor: '#d33',
     cancelButtonText: "Nem, mégsem",
     confirmButtonText: 'Igen, biztos'
-  }).then((result) => { 
+  }).then((result) => {
     if (result.value) {
       Swal.fire(
         'Sikeres szavazás!',
         'Szavazatod elmenésre került!',
         'success'
-      )
-
+      ).then((result) => {
+            window.location.href = "/lavato/upload_vote.php?hash=" + hash + "&class=" + i;
+        });
 
     }
   })
