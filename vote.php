@@ -46,18 +46,25 @@ if (!verify_hash($hash)) {
     <script>visibleForm();</script>
 <?php
 } elseif (verify_hash($hash)) {
-?>
-    <script type="text/javascript">
-        window.setTimeout(hideForm, 2);
-        voteInfo();
-    </script>
-    <div id="main">
-        <div class="choose-class-A" onclick="confirmVote(this.textContent, true, '<?php echo $hash;?>')"><p class="choose-class-text">A</p></div>
-        <div class="choose-class-B" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">B</p></div>
-        <div class="choose-class-C" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">C</p></div>
-        <div class="choose-class-D" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">D</p></div>
-    </div>
-<?php
+
+    if(!hasBeenActivated($hash)) {
+        ?><script>codeAlreadyActivated();</script> <?php
+    } else {
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(hideForm, 2);
+            voteInfo();
+        </script>
+        <div id="main">
+            <div class="choose-class-A" onclick="confirmVote(this.textContent, true, '<?php echo $hash;?>')"><p class="choose-class-text">A</p></div>
+            <div class="choose-class-B" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">B</p></div>
+            <div class="choose-class-C" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">C</p></div>
+            <div class="choose-class-D" onclick="confirmVote(this.textContent, false, '<?php echo $hash;?>')"><p class="choose-class-text">D</p></div>
+        </div>
+    <?php
+    }
+
+        
 }
 } else {
 

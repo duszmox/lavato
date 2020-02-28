@@ -24,7 +24,10 @@
 
         </div>
         <div class="container-body">
+            <br>
             <p>A Fazekas Lúdavató rendszere a 2020-as eseménytől kezdve elektronikusan fog működni. Erre több indokból került sor, először is azért, hogy iskolánk haladjon a korral, modernizálódjuk, másrészt pedig azért is hogy így lecsökkentsük vagy teljesen megszüntessük a csalásokat.</p>
+            <br>
+
         </div>
     </div>
    

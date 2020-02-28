@@ -47,9 +47,23 @@ function confirmVote(i, cond = false, hash) {
 function successfulVote() {
     Swal.fire(
         'Sikeres szavazás!',
-        'Szavazatod elmenésre került!',
+        'Szavazatod elmentésre került!',
         'success'
     )
 }
 
+function codeAlreadyActivated() {
+    Swal.fire({
+        title: 'Ezt a kódot már használták egyszer!',
+        icon: 'error',
+        html:
+            'Ezt a kódot már egyszer beolvasta valaki.',
+        focusConfirm: false,
+        confirmButtonText: 'Vissza'
+    }).then((result) => {
+        if (result.value) {
+            window.location.href = "vote.php";
+        }
+    })
+}
 
