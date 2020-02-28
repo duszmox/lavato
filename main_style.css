@@ -72,16 +72,15 @@ body {
     margin-top: 3%;
 }
 
+
 @media (min-width:600px) { 
     .container-title-h1 {
-        margin-top: 5vw;
-        font-size: 4vw;
+        font-size: 3.5vw;
         word-break: normal;
     }
  }
  @media (max-width:600px) {
     .container-title-h1 {
-        margin-top: 5vw;
         font-size: 8vw;
         word-break: normal;
         
@@ -97,4 +96,7 @@ p {
 .container-title {
     margin-left: 3vw;
     margin-right: 3vw;
+}
+a.canvasjs-chart-credit {
+    display:  none !important;
 }

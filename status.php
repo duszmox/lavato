@@ -26,6 +26,7 @@
         <?php
         require_once("snippets.php");
         $data = get_class_votes();
+        $data_pretty = get_class_votes();
 
         $all = $data['A']+$data['B']+$data['C']+$data['D'];
         foreach($data as $key => $value){
@@ -45,10 +46,10 @@
                     yValueFormatString: "0.00\"%\"",
                     indexLabel: "{label} {y}",
                     dataPoints: [
-                        {y: <?php echo $data['A']?>, label: "A"},
-                        {y: <?php echo $data['B']?>, label: "B"},
-                        {y: <?php echo $data['C']?>, label: "C"},
-                        {y: <?php echo $data['D']?>, label: "D"}
+                        {y: <?php echo $data['A']?>, label: "A - <?php echo $data_pretty['A']?> szavazat,"},
+                        {y: <?php echo $data['B']?>, label: "B - <?php echo $data_pretty['B']?> szavazat,"},
+                        {y: <?php echo $data['C']?>, label: "C - <?php echo $data_pretty['C']?> szavazat,"},
+                        {y: <?php echo $data['D']?>, label: "D - <?php echo $data_pretty['D']?> szavazat,"}
                     ]
                 }]
             });
@@ -69,7 +70,7 @@ require("navbar.php");
 ?>
 
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="assets/js/canvasjs.min.js"></script>
 
 </body>
 </html>
