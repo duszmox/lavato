@@ -1,4 +1,5 @@
 <?php 
+require_once("snippets.php");
 ?>
 <html>
     <head>
@@ -12,7 +13,7 @@
     </head>
 <body class="bg">
     <?php
-        require("navbar.php")
+        require_once("navbar.php")
     ?>
 
     <div class="container main-container">

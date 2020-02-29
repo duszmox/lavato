@@ -1,53 +1,46 @@
 <?php
 require_once("snippets.php");
 require_once("navbar.php");
-if (isset($_POST['submit']) && $_POST['submit'] == "LOGIN") {
+if( user_logged_in()) {
+    header("Location: /lavato/");
+}
+else if (isset($_POST['submit']) && $_POST['submit'] == "LOGIN") {
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = html_escape($_POST['username']);
         $password = html_escape($_POST['password']);
-
         if (validate_user($username, $password)) {
             if (login_user($username)) {
-                echo "Logged in successfully";
-            } else {
-                echo "Error";
-            };
-        }
-    }
-}
-if (isset($_POST['submit']) && $_POST['submit'] == "REGISTER") {
-    if (isset($_POST['username']) and isset($_POST['password'])) {
-        if ($_POST['password'] == $_POST['password_again']) {
-            $username = html_escape($_POST['username']);
-            $password = html_escape($_POST['password']);
-            if (register_user($username, $password)) {
-                echo "Sikeres regisztráció";
+                ?><script>
+                    successfulLogin()
+                </script><?php
+                        }
+                        else {
+                            echo "Error";
+                        };
+                    }
+                }
             }
-        }
-    }
-}
-?>
+            
+            
+                           ?>
 
-<form method="post" action="login.php">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username"><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password"><br>
-    <input type="submit" name="submit" value="LOGIN">
-</form>
-<hr>
-<hr>
-<hr>
-<form method="post" action="login.php" style="display:<?php
-if (!can_register()) {
-    echo "none";
-}
-?>">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username"><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password"><br>
-    <label for="password_again">Password Again</label>
-    <input type="password" name="password_again" id="password_again"><br>
-    <input type="submit" name="submit" value="REGISTER">
-</form>
+<head>
+    <title>Lavató - Login</title>
+</head>
+<div class="main-container container">
+    <h1 class='login-h1'>Login</h1>
+    <div class="login-div-form card">
+        <form method="post" action="login.php" class="login-form">
+            <div class="form-group login-form" id="form-group">
+                <label for="username" class="login-label-username"><strong>Username:</strong></label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username" onkeyup="this.value = this.value.toLowerCase();">
+                <label for="password" class="login-label-password"><strong>Password:</strong> </label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                <input type="submit" class="btn btn-primary login-submit-button" name="submit" value="LOGIN">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
