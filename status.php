@@ -42,7 +42,7 @@
                 },
                 data: [{
                     type: "pie",
-                    startAngle: 240,
+                    startAngle: 240, 
                     yValueFormatString: "0.00\"%\"",
                     indexLabel: "{label} {y}",
                     dataPoints: [
