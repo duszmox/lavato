@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="assets/css/bootstrap.css">
+<script src="https://kit.fontawesome.com/e8464711df.js" crossorigin="anonymous"></script>
 <script src="main.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
