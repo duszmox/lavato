@@ -82,7 +82,7 @@ function successfulLogin() {
 }
 function successfulCodeGen($number) {
   Swal.fire({
-    title: "Sikeresen legenráltál "+$number+" kódot!",
+    title: "Sikeresen legeneráltál "+$number+" kódot!",
     text: "",
     icon: "success",
     confirmButtonColor: "#28a745",
