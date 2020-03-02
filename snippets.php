@@ -100,25 +100,30 @@ function get_class_votes()
     return $class_data;
 }
 
-function gen_uuid() {
-    return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+function gen_uuid()
+{
+    return sprintf(
+        '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
         // 32 bits for "time_low"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
 
         // 16 bits for "time_mid"
-        mt_rand( 0, 0xffff ),
+        mt_rand(0, 0xffff),
 
         // 16 bits for "time_hi_and_version",
         // four most significant bits holds version number 4
-        mt_rand( 0, 0x0fff ) | 0x4000,
+        mt_rand(0, 0x0fff) | 0x4000,
 
         // 16 bits, 8 bits for "clk_seq_hi_res",
         // 8 bits for "clk_seq_low",
         // two most significant bits holds zero and one for variant DCE1.1
-        mt_rand( 0, 0x3fff ) | 0x8000,
+        mt_rand(0, 0x3fff) | 0x8000,
 
         // 48 bits for "node"
-        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff)
     );
 }
 
@@ -133,7 +138,7 @@ function create_random_data($max, $hasBeenActivated, $classes)
         $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated, class) VALUES ('$token', '$hasBeenActivated' ,'$classes')";
         mysqli_query($conn, $sql);
         //todo ellenorize, hogy van-e mar ilyen hash
-        
+
     }
     return true;
 }
@@ -199,7 +204,7 @@ function is_admin()
 }
 function register_user($username, $password)
 {
-   
+
     global $conn;
     if (!empty(get_userdata($username))) {
         echo "Már foglalt felhaszálónév";
@@ -226,48 +231,39 @@ function get_log()
             <td> <?php echo "{$row['value']}" ?></td>
             <td> <?php echo "{$row['date']}" ?></td>
         </tr>
-<?php
+    <?php
     }
 }
 
-function goBack() {
+function goBack()
+{
     ?>
-    <script> window.history.back()</script>
-    <?php
+    <script>
+        window.history.back()
+    </script>
+<?php
 }
-
-function exportDataToExcel() {
-    $filename = "export";
-    $sql = "SELECT hash FROM lavato_keys";
+function exportDataToExcel()
+{
     global $conn;
-    $result = mysqli_query($conn, $sql);
-    $file_ending = "xls";
-    header("Content-Type: application/xls");    
-    header("Content-Disposition: attachment; filename=$filename.xls");  
-    header("Pragma: no-cache"); 
-    header("Expires: 0");
-    $sep = "\t";
-    for ($i = 0; $i < mysqli_num_fields($result); $i++) {
-        echo mysqli_fetch_field($result)->name . "\t";
+    $sql = "SELECT `id`,`hash` FROM `lavato_keys`";
+    $setRec = mysqli_query($conn, $sql);
+    $columnHeader = '';
+    $columnHeader = "Id" . "\t" . "Hash" . "\t";
+    $setData = '';
+    while ($rec = mysqli_fetch_row($setRec)) {
+        $rowData = '';
+        foreach ($rec as $value) {
+            $value = '"' . $value . '"' . "\t";
+            $rowData .= $value;
         }
-        print("\n");    
-            while($row = mysqli_fetch_row($result))
-            {
-                $schema_insert = "";
-                for($j=0; $j<mysqli_num_fields($result);$j++)
-                {
-                    if(!isset($row[$j]))
-                        $schema_insert .= "NULL".$sep;
-                    elseif ($row[$j] != "")
-                        $schema_insert .= "$row[$j]".$sep;
-                    else
-                        $schema_insert .= "".$sep;
-                }
-                $schema_insert = str_replace($sep."$", "", $schema_insert);
-                $schema_insert = preg_replace("/\r\n|\n\r|\n|\r/", " ", $schema_insert);
-                $schema_insert .= "\t";
-                print(trim($schema_insert));
-                print "\n";
-            }   
-}
+        $setData .= trim($rowData) . "\n";
+    }
 
+    header("Content-type: application/octet-stream");
+    header("Content-Disposition: attachment; filename=User_Detail.xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    echo ucwords($columnHeader) . "\n" . $setData . "\n";
+}
