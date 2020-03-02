@@ -195,12 +195,19 @@ a.canvasjs-chart-credit {
   margin-right: 2vw;
 }
 .hash-export-label {
-  font-size:  1.5rem;
+  font-size: 1.5rem;
   display: inline;
 }
 .hash-export-button {
   display: inline;
   margin-bottom: 0.5rem;
+}
+.hash-export-input {
+  display: inline;
+  padding: 0vw;
+  border: none;
+  background-color: #28a745;
+  color: white;
 }
 .vote-h1 {
   margin-left: auto;

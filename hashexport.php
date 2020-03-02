@@ -3,8 +3,6 @@ require_once("snippets.php");
 require_once("navbar.php");
 if (!is_admin()) {
     goBack();
-} elseif ($_POST['submit']) {
-    exportDataToExcel();
 }
 
 ?>
@@ -21,13 +19,9 @@ if (!is_admin()) {
     <div class="main-container container">
         <h1 class="hashexport-h1">Kódok exportálása</h1>
         <hr class="hashexport-hr">
-        <form action="export.php" class=" hash-export-form"method="POST">
+        <form action="export.php" class=" hash-export-form" method="POST">
             <label for="xls" class="hash-export-label">Kódok exportálása excel táblába: </label>
-            <button type="submit" class="btn btn-success hash-export-button" name="submit">
-                <i class="fas fa-file-excel"></i> XLS
-            </button>
-            
-            
+            <input type="submit" name="submit" class="btn btn-success hash-export-button " value="XLS">
         </form>
     </div>
 </body>
