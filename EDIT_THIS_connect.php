@@ -14,6 +14,10 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] == "") {
 function can_register(){
     return false;
 }
+
+global $page_url;
+$page_url = "https://duszmo.f.fazekas.hu/lavato/";
+
 global $conn;
 $conn = new mysqli($servername, $username, $password, $db);
 // Check connection
