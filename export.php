@@ -3,8 +3,7 @@ if ($_POST['submit']) {
     require_once("connect.php");
     global $conn;
     $sql = "SELECT `id`,`hash` FROM `lavato_keys`";
-    $filename = "Webinfopen.xls"; 
-    header("Content-Disposition: attachment; filename=$filename");
+    header("Content-Disposition: attachment; filename=tables.xls");
     header("Content-Type: application/vnd.ms-excel");
     $user_query = mysqli_query($conn, $sql);
     $flag = false;
