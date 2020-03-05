@@ -1,11 +1,11 @@
 <?php
 require_once("snippets.php");
 require_once("navbar.php");
+displayErrors();
+
 if (!is_admin()) {
     goBack();
-}
-
-?>
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +22,9 @@ if (!is_admin()) {
         <form action="export.php" class=" hash-export-form" method="POST">
             <label for="xls" class="hash-export-label">Kódok exportálása excel táblába: </label>
             <input type="submit" name="submit" class="btn btn-success hash-export-button " value="XLS">
+        </form>
+        <form action="qr_code/" method="get">
+            <input type="submit" name="url" value="a">
         </form>
     </div>
 </body>
