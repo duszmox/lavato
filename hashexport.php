@@ -5,7 +5,7 @@ displayErrors();
 
 if (!is_admin()) {
     goBack();
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,13 +19,16 @@ if (!is_admin()) {
     <div class="main-container container">
         <h1 class="hashexport-h1">Kódok exportálása</h1>
         <hr class="hashexport-hr">
-        <form action="export.php" class=" hash-export-form" method="POST">
-            <label for="xls" class="hash-export-label">Kódok exportálása excel táblába: </label>
-            <input type="submit" name="submit" class="btn btn-success hash-export-button " value="XLS">
-        </form>
-        <form action="qr_code/" method="get">
-            <input type="submit" name="url" value="a">
-        </form>
+        <div class="hash-export-div">
+            <form action="export.php" class="hash-export-form-1" method="POST">
+                <label for="xls" class="hash-export-label">Kódok exportálása excel táblába: </label>
+                <input type="submit" name="submit" class="btn btn-success hash-export-button" value="XLS">
+            </form>
+            <form action="qr_code/" class="hash-export-form-2" method="get">
+                <label for="qrCodes" class="hash-export-label">Kódok exportálása QR code-okba: </label>
+                <input type="submit" name="url" class="btn btn-primary hash-export-button" value="QR Code">
+            </form>
+        </div>
     </div>
 </body>
 
