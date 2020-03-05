@@ -1,9 +1,12 @@
 <?php
-    require_once("../connect.php");
-    require_once("functions.php");
+    require_once("../snippets.php");
+
     display_errors();
     global $page_url; 
-    if(isset($_GET["url"])){
+    
+    if (!is_admin()) {
+        header("Location: ../");
+    } else if(isset($_GET["url"])){
         global $conn;
         $data = get_hashes_from_database("lavato_keys","hash", $conn);
         foreach($data as $key => $value){
@@ -13,10 +16,6 @@
 
         }
         download_folder_in_zip("qr_codes.zip");
-        
     }
  
 ?>
-<form method="get">
-    <input type="text" name="url">
-</form>   
