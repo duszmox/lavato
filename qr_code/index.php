@@ -17,7 +17,7 @@
             $i++;
 
         }
-        download_folder_in_zip();
+        $zipFile = download_folder_in_zip();
         delete_files("qr_codes/");
         unlink($zipFile);
     }
