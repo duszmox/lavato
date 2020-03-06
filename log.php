@@ -24,7 +24,8 @@ if (!is_admin()) {
     });
 </script>
 <div class="main-container container">
-    <h1 class="log-h1">Eseménylista</h1>
+    <h1 class="register-h1">Eseménylista</h1>
+    <hr class="register-hr">
     <div class="log-table">
         <table id="logTable" class="table table-striped table-bordered" >
             <thead>

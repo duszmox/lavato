@@ -32,7 +32,7 @@ if (user_logged_in()) {
 </head>
 <div class="main-container container">
     <h1 class='login-h1'>Login</h1>
-    <div class="login-div-form card">
+    <div class="login-div-form ">
         <form method="post" action="login.php" class="login-form">
             <div class="form-group login-form" id="form-group">
                 <label for="username" class="login-label-username"><strong>Username:</strong></label>
