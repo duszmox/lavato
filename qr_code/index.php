@@ -13,7 +13,9 @@
         foreach($data as $key => $value){
             $url = $page_url . "vote.php?hash=".$value;
             $qr_core_url = create_googlechart_from_url($url);
-            save_image_from_website($qr_core_url, "qr_codes/", "QR-Code-".$i);
+            // $background_url = "../assets/png/background.png";
+            // $final_url = merge_two_photos($qr_core_url, $background_url);
+            save_image_from_website($qr_code_url, "qr_codes/", "QR-Code-".$i);
             $i++;
 
         }
