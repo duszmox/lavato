@@ -206,10 +206,30 @@ function register_user($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-        echo "Már foglalt felhaszálónév";
+        ?> 
+        <script>
+            alreadyUsedUsername()
+        </script>
+        <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password) VALUES ('$username', '" . hash("sha256", $password) . "')";
+    log_action("register_user", $username);
+    return mysqli_query($conn, $sql);
+}
+function register_admin($username, $password)
+{
+
+    global $conn;
+    if (!empty(get_userdata($username))) {
+        ?> 
+        <script>
+            alreadyUsedUsername()
+        </script>
+        <?php
+        return false;
+    }
+    $sql = "INSERT INTO lavato_users (username, password, admin) VALUES ('$username', '" . hash("sha256", $password) . "', '1')";
     log_action("register_user", $username);
     return mysqli_query($conn, $sql);
 }
@@ -359,4 +379,25 @@ function get_hash_row_number()
     $result = mysqli_query($conn, $sql);
     $num_rows = mysqli_num_rows($result);
     return $num_rows;
+}
+function old_download_folder_in_zip()
+{
+    $zipFile = "codes.zip";
+    $zip = new ZipArchive;
+    if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
+        if ($handle = opendir('qr_codes')) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != ".." && !is_dir('qr_codes/' . $entry)) {
+                    $zip->addFile('qr_codes/' . $entry);
+                }
+            }
+            closedir($handle);
+        }
+        $zip->close();
+    }
+
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename=' . basename($zipFile));
+    readfile($zipFile);
+    return $zipFile;
 }
