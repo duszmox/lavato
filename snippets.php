@@ -275,15 +275,31 @@ function displayErrors()
 
 function create_googlechart_from_url($url)
 {
-    return "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
+    return "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
 }
 
 function save_image_from_website($url, $dest, $name)
-{   
-
-    
+{
     $img = file_get_contents($url);
     file_put_contents($dest . substr(($name . ".png"), strrpos($name, '/')), $img);
+}
+function merge_two_photos($qr_code_url, $background_url)
+{
+    $dest = imagecreatefrompng($background_url);
+    $src = imagecreatefrompng($qr_code_url);
+
+    imagealphablending($dest, false);
+    imagesavealpha($dest, true);
+
+    imagecopymerge($dest, $src, 500, 500, 0, 0, 500, 500, 100); 
+
+    header('Content-Type: image/png');
+    
+
+    imagedestroy($dest);
+    imagedestroy($src);
+    return $dest;
+    
 }
 function download_folder_in_zip()
 {
@@ -319,17 +335,19 @@ function get_hashes_from_database($table, $column, $conn)
     }
     return $data;
 }
-function delete_files($target) {
-    if(is_dir($target)){
-        $files = glob( $target . '*', GLOB_MARK );
-        foreach( $files as $file ){
-            delete_files( $file );      
+function delete_files($target)
+{
+    if (is_dir($target)) {
+        $files = glob($target . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            delete_files($file);
         }
-    } elseif(is_file($target)) {
-        unlink( $target );  
+    } elseif (is_file($target)) {
+        unlink($target);
     }
 }
-function get_hash_row_number() {
+function get_hash_row_number()
+{
     global $conn;
     $sql = "SELECT * from lavato_keys";
     $result = mysqli_query($conn, $sql);
