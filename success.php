@@ -14,7 +14,7 @@ Swal.fire(
       ).then((result) => {
         if (result.value) {
             window.location.href = "/lavato/";
-        }
+      }});
 </script>
 </body>
 </html>

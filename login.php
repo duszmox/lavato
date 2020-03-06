@@ -1,28 +1,31 @@
 <?php
 require_once("snippets.php");
 require_once("navbar.php");
-if( user_logged_in()) {
+if (user_logged_in()) {
     header("Location: /lavato/");
-}
-else if (isset($_POST['submit']) && $_POST['submit'] == "LOGIN") {
+} else if (isset($_POST['submit']) && $_POST['submit'] == "LOGIN") {
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = html_escape($_POST['username']);
         $password = html_escape($_POST['password']);
         if (validate_user($username, $password)) {
             if (login_user($username)) {
-                ?><script>
+?><script>
                     successfulLogin()
                 </script><?php
-                        }
-                        else {
-                            echo "Error";
-                        };
+                        } 
+                    }else {
+                        ?>
+            <script>
+                cannotLogin();
+            </script>
+<?php
                     }
                 }
             }
-            
-            
-                           ?>
+
+
+
+?>
 
 <head>
     <title>Lavató - Login</title>
@@ -41,6 +44,3 @@ else if (isset($_POST['submit']) && $_POST['submit'] == "LOGIN") {
         </form>
     </div>
 </div>
-
-
-
