@@ -67,6 +67,7 @@ function codeAlreadyActivated() {
   });
 }
 
+  
 function successfulLogin() {
   Swal.fire({
     title: "Sikeresen bejelentkeztél",
@@ -78,6 +79,15 @@ function successfulLogin() {
     if (result.value) {
       window.location.replace("/lavato/");
     }
+  });
+}
+function cannotLogin() {
+  Swal.fire({
+    title: "Sikertelen bejelentkezés",
+    text: "Hibás felhasználónév vagy jelszó! Próbáld újra!",
+    icon: "error",
+    confirmButtonColor: "#28a745",
+    confirmButtonText: "Ok"
   });
 }
 function successfulCodeGen($number) {

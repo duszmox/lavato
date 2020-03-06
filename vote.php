@@ -63,8 +63,6 @@ display_errors();
                         </form>
                     </div>
                 </div>
-
-
             </div> <?php
                 } elseif (verify_hash($hash)) {
 
