@@ -283,33 +283,39 @@ function save_image_from_website($url, $dest, $name)
     $img = file_get_contents($url);
     file_put_contents($dest . substr(($name . ".png"), strrpos($name, '/')), $img);
 }
-function merge_two_photos($qr_code_url, $background_url)
+function merge_two_photos($qr_code_url, $background_url, $i)
 {
     $dest = imagecreatefrompng($background_url);
     $src = imagecreatefrompng($qr_code_url);
-
+    
+    
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 500, 500, 0, 0, 500, 500, 100); 
+    imagecopymerge($dest, $src, 70, 80, 0, 0, 500, 500, 100); 
 
-    header('Content-Type: image/png');
     
-
-    imagedestroy($dest);
     imagedestroy($src);
-    return $dest;
-    
+
+    ob_start();
+    header('Content-Type: image/png');
+    imagepng($dest);
+    $image_data = ob_get_contents();
+    ob_end_clean();
+    $file = "final_images/QR-Code-" . $i . ".png";
+    file_put_contents($file, $image_data);
+    return true;
+
 }
-function download_folder_in_zip()
+function download_folder_in_zip($folder)
 {
     $zipFile = "codes.zip";
     $zip = new ZipArchive;
     if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
-        if ($handle = opendir('qr_codes')) {
+        if ($handle = opendir($folder)) {
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir('qr_codes/' . $entry)) {
-                    $zip->addFile('qr_codes/' . $entry);
+                if ($entry != "." && $entry != ".." && !is_dir($folder.'/' . $entry)) {
+                    $zip->addFile($folder.'/' . $entry);
                 }
             }
             closedir($handle);
