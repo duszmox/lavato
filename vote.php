@@ -9,7 +9,7 @@ display_errors();
 
 <head>
 
-
+ 
     <title>Lavató - Szavazás</title>
 
     <link rel="stylesheet" href="main_style.css">
@@ -95,7 +95,6 @@ display_errors();
                     } else {
                         ?>
                 <script type="text/javascript">
-                    window.setTimeout(hideForm, 2);
                     voteInfo();
                 </script>
                 <div id="main">
