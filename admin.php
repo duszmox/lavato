@@ -11,7 +11,7 @@
     <?php
     require_once("snippets.php");
     require_once("navbar.php");
-    if( ! is_admin()) {
+    if (!is_admin()) {
         goBack();
     };
     ?>
@@ -24,8 +24,10 @@
             <li class="admin-li"><a href="register.php" class="admin-li-a">Segítő regisztrálása</a></li>
             <li class="admin-li"><a href="hashgen.php" class="admin-li-a">Kódok generálása</a></li>
             <li class="admin-li"><a href="hashexport.php" class="admin-li-a">Kódok exportálása</a></li>
-
-
+        </ul>
+        <h3 class="admin-h3">Szigorúan csak az esemény után!</h3>
+        <ul class="admin-ul">
+            <li class="admin-li"><a href="hashdelete.php" class="admin-li-a">Kódok törlése</a></li>
         </ul>
 
 

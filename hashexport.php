@@ -29,7 +29,7 @@ if (!is_admin()) {
                 <input type="submit" name="url" class="btn btn-warning hash-export-button" value="QR code">
             </form>
             <form action="qr_code/" class="hash-export-form-2" method="get">
-                <label for="qrCodes" class="hash-export-label">Kódok exportálása kártyákra: </label>
+                <label for="qrCodes" class="hash-export-label">Kódok exportálása kártyákra (Maximum 430): </label>
                 <input type="submit" name="url" class="btn btn-primary hash-export-button" value="Kártyák">
             </form>
         </div>

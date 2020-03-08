@@ -24,6 +24,7 @@
         $zipFile = download_folder_in_zip("final_images");
         delete_files("final_images/");
         unlink($zipFile);
+        log_action("Exported to cards", $_SESSION["username"]);
     }
  
 ?>
