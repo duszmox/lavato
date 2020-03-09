@@ -21,7 +21,6 @@
         old_download_folder_in_zip();
         delete_files("qr_codes/");
         unlink($zipFile);
-        log_action("Exported to QR codes", $_SESSION["username"]);
     }
  
 ?>
