@@ -189,38 +189,19 @@ a.canvasjs-chart-credit {
   margin-left: 2vw;
   margin-right: 2vw;
 }
-.hashdelete-h1 {
-  margin-top: 2vw;
-  margin-left: 2vw;
-}
-.hashdelete-hr {
-  margin-bottom: 3vw;
-  margin-left: 2vw;
-  margin-right: 2vw;
-}
 .hash-export-div {
-  margin-left: 2vw;
-  margin-right: 2vw;
-}
-.hashdelete-div {
   margin-left: 2vw;
   margin-right: 2vw;
 }
 .hash-export-form-2 {
   margin-bottom: 2vw;
-}
-.hashdelete-form {
-  margin-bottom: 2vw;
+
 }
 .hash-export-label {
   font-size: 1.5rem;
   display: inline;
 }
 .hash-export-button {
-  display: inline;
-  margin-bottom: 0.5rem;
-}
-.hashdelete-button {
   display: inline;
   margin-bottom: 0.5rem;
 }
@@ -266,9 +247,4 @@ a.canvasjs-chart-credit {
 .log-h1 {
   margin-top: 1vw;
   margin-left: 1vw;
-}
-.admin-h3 {
-  margin-top: 3vw;
-  margin-left: 1vw;
-  color: red;
 }
