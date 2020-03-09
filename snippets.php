@@ -206,11 +206,11 @@ function register_user($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-?>
+        ?> 
         <script>
             alreadyUsedUsername()
         </script>
-    <?php
+        <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password) VALUES ('$username', '" . hash("sha256", $password) . "')";
@@ -222,11 +222,11 @@ function register_admin($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-    ?>
+        ?> 
         <script>
             alreadyUsedUsername()
         </script>
-    <?php
+        <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password, admin) VALUES ('$username', '" . hash("sha256", $password) . "', '1')";
@@ -243,7 +243,7 @@ function get_log()
     $sql = 'SELECT action, value, date, id FROM lavato_log';
     $retval = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
-    ?>
+?>
         <tr>
             <th scope="row"><?php echo "{$row['id']}" ?></th>
             <td><?php echo "{$row['action']}" ?> </td>
@@ -295,7 +295,7 @@ function displayErrors()
 
 function create_googlechart_from_url($url)
 {
-    return "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
+    return "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
 }
 
 function save_image_from_website($url, $dest, $name)
@@ -307,14 +307,14 @@ function merge_two_photos($qr_code_url, $background_url, $i)
 {
     $dest = imagecreatefrompng($background_url);
     $src = imagecreatefrompng($qr_code_url);
-
-
+    
+    
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 70, 80, 0, 0, 500, 500, 100);
+    imagecopymerge($dest, $src, 50, 50, 0, 0, 200, 200, 100); 
 
-
+    
     imagedestroy($src);
 
     ob_start();
@@ -325,6 +325,7 @@ function merge_two_photos($qr_code_url, $background_url, $i)
     $file = "final_images/QR-Code-" . $i . ".png";
     file_put_contents($file, $image_data);
     return true;
+
 }
 function download_folder_in_zip($folder)
 {
@@ -333,8 +334,8 @@ function download_folder_in_zip($folder)
     if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
         if ($handle = opendir($folder)) {
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir($folder . '/' . $entry)) {
-                    $zip->addFile($folder . '/' . $entry);
+                if ($entry != "." && $entry != ".." && !is_dir($folder.'/' . $entry)) {
+                    $zip->addFile($folder.'/' . $entry);
                 }
             }
             closedir($handle);
@@ -383,7 +384,7 @@ function old_download_folder_in_zip()
 {
     $zipFile = "codes.zip";
     $zip = new ZipArchive;
-    if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open($zipFile, ZipArchive::OVERWRITE) === TRUE) {
         if ($handle = opendir('qr_codes')) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != ".." && !is_dir('qr_codes/' . $entry)) {

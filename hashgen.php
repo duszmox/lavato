@@ -11,7 +11,6 @@ else if (isset($_POST['submit']) && $_POST['submit'] == "Generálás") {
             ?>
             <script>successfulCodeGen(<?php echo $number?>)</script>
             <?php
-            log_action("Generated ".$number." codes", $_SESSION['username']);
         }
     } 
 }
