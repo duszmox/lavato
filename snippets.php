@@ -384,7 +384,7 @@ function old_download_folder_in_zip()
 {
     $zipFile = "codes.zip";
     $zip = new ZipArchive;
-    if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open($zipFile, ZipArchive::OVERWRITE) === TRUE) {
         if ($handle = opendir('qr_codes')) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != ".." && !is_dir('qr_codes/' . $entry)) {
