@@ -401,3 +401,59 @@ function old_download_folder_in_zip()
     readfile($zipFile);
     return $zipFile;
 }
+function delete_hashes()
+{
+?>
+    <script>
+        Swal.fire({
+            title: "Biztos ki szeretnéd törölni az összes kódot?",
+            text: "Döntésedet nem tudod majd visszavonni!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Nem, mégsem",
+            confirmButtonText: "Igen, biztos"
+        }).then(result => {
+            if (result.value) {
+                Swal.mixin({
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Mégsem",
+                    confirmButtonText: "Megerősítés"
+                }).queue([{
+                    title: 'Ahhoz hogy, megerősítsd döntésed, írd be az "IGEN" szót',
+                    text: 'Döntésedet nem tudod majd visszavonni!'
+                }, ]).then((result) => {
+                    if (result.value == "IGEN" || result.value == 'Igen' || result.value == "igen") {
+                        <?php
+                        global $conn;
+                        $sql = 'DELETE FROM lavato_keys';
+                        mysqli_query($conn, $sql);
+                        log_action("Delete hashes", $_SESSION['username'])
+                        ?>
+                        Swal.fire({
+                            title: 'Sikeresen kitörölted a kódokat',
+                            icon: 'success',
+                            confirmButtonText: 'Rendben'
+                        })
+                    } else if (! result.value == "IGEN" || ! result.value == 'Igen' || ! result.value == "igen") {
+                        Swal.fire({
+                            title: 'Helytelen szót írtál be!',
+                            text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
+                            icon: 'error',
+                            confirmButtonText: 'Rendben'
+                        })
+                    }
+                })
+            }
+        });
+    </script>
+
+
+
+
+<?php
+}
