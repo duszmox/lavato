@@ -206,10 +206,30 @@ function register_user($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-        echo "Már foglalt felhaszálónév";
+        ?> 
+        <script>
+            alreadyUsedUsername()
+        </script>
+        <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password) VALUES ('$username', '" . hash("sha256", $password) . "')";
+    log_action("register_user", $username);
+    return mysqli_query($conn, $sql);
+}
+function register_admin($username, $password)
+{
+
+    global $conn;
+    if (!empty(get_userdata($username))) {
+        ?> 
+        <script>
+            alreadyUsedUsername()
+        </script>
+        <?php
+        return false;
+    }
+    $sql = "INSERT INTO lavato_users (username, password, admin) VALUES ('$username', '" . hash("sha256", $password) . "', '1')";
     log_action("register_user", $username);
     return mysqli_query($conn, $sql);
 }
@@ -275,7 +295,7 @@ function displayErrors()
 
 function create_googlechart_from_url($url)
 {
-    return "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
+    return "https://chart.googleapis.com/chart?chs=420x420&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
 }
 
 function save_image_from_website($url, $dest, $name)
@@ -292,7 +312,7 @@ function merge_two_photos($qr_code_url, $background_url, $i)
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 70, 80, 0, 0, 500, 500, 100); 
+    imagecopymerge($dest, $src, 35, 30, 10, 10, 400, 400, 100); 
 
     
     imagedestroy($src);
@@ -359,4 +379,81 @@ function get_hash_row_number()
     $result = mysqli_query($conn, $sql);
     $num_rows = mysqli_num_rows($result);
     return $num_rows;
+}
+function old_download_folder_in_zip()
+{
+    $zipFile = "codes.zip";
+    $zip = new ZipArchive;
+    if ($zip->open($zipFile, ZipArchive::OVERWRITE) === TRUE) {
+        if ($handle = opendir('qr_codes')) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != ".." && !is_dir('qr_codes/' . $entry)) {
+                    $zip->addFile('qr_codes/' . $entry);
+                }
+            }
+            closedir($handle);
+        }
+        $zip->close();
+    }
+
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename=' . basename($zipFile));
+    readfile($zipFile);
+    return $zipFile;
+}
+function delete_hashes()
+{
+?>
+    <script>
+        Swal.fire({
+            title: "Biztos ki szeretnéd törölni az összes kódot?",
+            text: "Döntésedet nem tudod majd visszavonni!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Nem, mégsem",
+            confirmButtonText: "Igen, biztos"
+        }).then(result => {
+            if (result.value) {
+                Swal.mixin({
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Mégsem",
+                    confirmButtonText: "Megerősítés"
+                }).queue([{
+                    title: 'Ahhoz hogy, megerősítsd döntésed, meg kell válaszolnod egy kérdést!',
+                    text: 'Mikor fedezte fel Kolombusz Kristóf Amerikát (évszám)?'
+                }, ]).then((result) => {
+                    if (result.value == "1492") {
+                        <?php
+                        global $conn;
+                        $sql = 'DELETE FROM lavato_keys';
+                        mysqli_query($conn, $sql);
+                        log_action("Delete hashes", $_SESSION['username'])
+                        ?>
+                        Swal.fire({
+                            title: 'Sikeresen kitörölted a kódokat',
+                            icon: 'success',
+                            confirmButtonText: 'Rendben'
+                        })
+                    } else if (! result.value == "1492") {
+                        Swal.fire({
+                            title: 'Helytelen választ írtál be!',
+                            text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
+                            icon: 'error',
+                            confirmButtonText: 'Rendben'
+                        })
+                    }
+                })
+            }
+        });
+    </script>
+
+
+
+
+<?php
 }

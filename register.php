@@ -19,9 +19,25 @@
             if ($_POST['password'] == $_POST['password_again']) {
                 $username = html_escape($_POST['username']);
                 $password = html_escape($_POST['password']);
-                if (register_user($username, $password)) {
-                    echo "Sikeres regisztráció";
+                $admin_checked = html_escape($_POST['admin-checkbox']);
+                if($admin_checked == "admin") {
+                    if (register_admin($username, $password)) {
+                        ?>
+                        <script>
+                            successfulRegistration()
+                        </script>
+                        <?php        
+                    }
+                } else {
+                    if (register_user($username, $password)) {
+                        ?>
+                        <script>
+                            successfulRegistration()
+                        </script>
+                        <?php        
+                    }
                 }
+                  
             }
         }
     }
@@ -38,7 +54,10 @@
             <input type="password" class="form-control" placeholder="Jelszó" name="password" id="password"><br>
             <label for="password_again"><strong>Jelszó Megerősítése:</strong></label>
             <input type="password" class="form-control" placeholder="Jelszó Megerősítése" name="password_again" id="password_again"><br>
+            <label for="admin"><strong>Adminisztrátori jog:</strong></label>
+            <input type="checkbox" id="admin-checkbox" name="admin-checkbox" value="admin"> <br> <br>
             <input type="submit" name="submit" class="btn btn-primary" value="Regisztrálás">
+            
         </div>
         </form>
     </div>
