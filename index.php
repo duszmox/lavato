@@ -11,6 +11,7 @@ require_once("snippets.php");
     <link rel="stylesheet" href="assets/js/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Lavató</title>
     </head>
+
 <body class="bg">
     <?php
         require_once("navbar.php")

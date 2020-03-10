@@ -90,6 +90,24 @@ function cannotLogin() {
     confirmButtonText: "Ok"
   });
 }
+function alreadyUsedUsername() {
+  Swal.fire({
+    title: "Ez a felhasználónév már foglalt",
+    text: "Nem sikerült regisztrálni, mert már van ilyen felhasználó",
+    icon: "error",
+    confirmButtonColor: "#28a745",
+    confirmButtonText: "Ok"
+  });
+}
+function successfulRegistration() {
+    Swal.fire({
+      title: "Sikeresen regisztráltál egy új felasználót",
+      text: "",
+      icon: "success",
+      confirmButtonColor: "#28a745",
+      confirmButtonText: "Ok"
+    })
+}
 function successfulCodeGen($number) {
   Swal.fire({
     title: "Sikeresen legeneráltál "+$number+" kódot!",

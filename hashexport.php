@@ -24,9 +24,13 @@ if (!is_admin()) {
                 <label for="xls" class="hash-export-label">Kódok exportálása excel táblába: </label>
                 <input type="submit" name="submit" class="btn btn-success hash-export-button" value="XLS">
             </form>
-            <form action="qr_code/" class="hash-export-form-2" method="get">
+            <form action="qr_code/qr.php" class="hash-export-form-1" method="get">
                 <label for="qrCodes" class="hash-export-label">Kódok exportálása QR code-okba: </label>
-                <input type="submit" name="url" class="btn btn-primary hash-export-button" value="QR Code">
+                <input type="submit" name="url" class="btn btn-warning hash-export-button" value="QR code">
+            </form>
+            <form action="qr_code/" class="hash-export-form-2" method="get">
+                <label for="qrCodes" class="hash-export-label">Kódok exportálása kártyákra: </label>
+                <input type="submit" name="url" class="btn btn-primary hash-export-button" value="Kártyák">
             </form>
         </div>
     </div>
