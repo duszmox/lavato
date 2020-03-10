@@ -16,8 +16,8 @@ function can_register(){
 }
 
 global $page_url;
-$page_url = "https://guamanpj.com/lavato/";
-
+$page_url = "http://duszmo.f.fazekas.hu/lavato/";
+    
 global $conn;
 $conn = new mysqli($servername, $username, $password, $db);
 // Check connection
