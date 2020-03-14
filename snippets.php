@@ -295,7 +295,7 @@ function displayErrors()
 
 function create_googlechart_from_url($url)
 {
-    return "https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
+    return "https://chart.googleapis.com/chart?chs=420x420&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
 }
 
 function save_image_from_website($url, $dest, $name)
@@ -312,7 +312,7 @@ function merge_two_photos($qr_code_url, $background_url, $i)
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 50, 50, 0, 0, 200, 200, 100); 
+    imagecopymerge($dest, $src, 35, 30, 10, 10, 400, 400, 100); 
 
     
     imagedestroy($src);
@@ -424,10 +424,10 @@ function delete_hashes()
                     cancelButtonText: "Mégsem",
                     confirmButtonText: "Megerősítés"
                 }).queue([{
-                    title: 'Ahhoz hogy, megerősítsd döntésed, írd be az "IGEN" szót',
-                    text: 'Döntésedet nem tudod majd visszavonni!'
+                    title: 'Ahhoz hogy, megerősítsd döntésed, meg kell válaszolnod egy kérdést!',
+                    text: 'Mikor fedezte fel Kolombusz Kristóf Amerikát (évszám)?'
                 }, ]).then((result) => {
-                    if (result.value == "IGEN" || result.value == 'Igen' || result.value == "igen") {
+                    if (result.value == "1492") {
                         <?php
                         global $conn;
                         $sql = 'DELETE FROM lavato_keys';
@@ -439,9 +439,9 @@ function delete_hashes()
                             icon: 'success',
                             confirmButtonText: 'Rendben'
                         })
-                    } else if (! result.value == "IGEN" || ! result.value == 'Igen' || ! result.value == "igen") {
+                    } else if (! result.value == "1492") {
                         Swal.fire({
-                            title: 'Helytelen szót írtál be!',
+                            title: 'Helytelen választ írtál be!',
                             text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
                             icon: 'error',
                             confirmButtonText: 'Rendben'
