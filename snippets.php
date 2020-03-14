@@ -295,7 +295,7 @@ function displayErrors()
 
 function create_googlechart_from_url($url)
 {
-    return "https://chart.googleapis.com/chart?chs=420x420&cht=qr&chl=" . urlencode($url) . "&choe=UTF-8";
+    return "https://api.qrserver.com/v1/create-qr-code/?size=375x375&data=" . urlencode($url);
 }
 
 function save_image_from_website($url, $dest, $name)
@@ -312,7 +312,7 @@ function merge_two_photos($qr_code_url, $background_url, $i)
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 35, 30, 10, 10, 400, 400, 100); 
+    imagecopymerge($dest, $src, 45, 40, 0, 0, 375, 375, 100); 
 
     
     imagedestroy($src);
@@ -430,7 +430,7 @@ function delete_hashes()
                     if (result.value == "1492") {
                         <?php
                         global $conn;
-                        $sql = 'DELETE FROM lavato_keys';
+                        $sql = 'TRUNCATE TABLE lavato_keys';
                         mysqli_query($conn, $sql);
                         log_action("Delete hashes", $_SESSION['username'])
                         ?>
