@@ -274,7 +274,7 @@ function get_users()
             </td>
             <td>
                 <form action="users.php" method="POST">
-                    <input type="text" name="username" value="<?php echo "{$row['username']}" ?>" style="display: none">
+                    <input type="hidden" name="username" value="<?php echo "{$row['username']}" ?>">
                     <input type="submit" name="passwordChange" class="btn btn-warning" value="Jelszó megváltoztatása">
                     <?php if ($row["admin"] != "1") {
                         echo '<input type="submit" name="makeAdmin" class="btn btn-dark" value="Adminná tétel">';
