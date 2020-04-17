@@ -4,13 +4,51 @@ require_once("navbar.php");
 if (!is_admin()) {
     goBack();
 };
-if ($_POST["passwordChange"]) {
-?>
+if (isset($_POST["passwordChange"])) {
+    
+    
+    
+    ?>
     <script>
-        
-    </script>
+        Swal.fire({
+            title: 'Credentials',
+            html: '<input type="password" id="password1" class="swal2-input" placeholder="Enter new password"></input>' +
+            '<input type="password" id="password2" class="swal2-input" placeholder="Enter new password again"></input>',
+            confirmButtonText: 'Login',
+            preConfirm: () => {
+                let password1 = Swal.getPopup().querySelector('#password1').value
+                let password2 = Swal.getPopup().querySelector('#password2').value
+                if (password1 === '' || password2 === '') {
+                    Swal.showValidationMessage(`You have to fill both of the forms!`)
+                }
+                if (password1 !== password2) {
+                    Swal.showValidationMessage(`Password confirmation doesn't match the password`)
+                }
+                return {
+                    password1: password1,
+                    password2: password2
+                }
+            }
+        }).then((result) => {
+            let data = {
+                password1: "password1",
+                password2: "password2"
+            };
+            $.ajax({
+                type: "POST",
+                url: 'users.php',
+                data: JSON.stringify(data),
+            });
+        })
+        </script>
 <?php
 }
+$changePassUser = $_POST["username"];
+
+if (isset($_POST["password1"]) && isset($_POST["password2"])) {
+    change_user_password($changePassUser, $_POST["password1"]);
+}
+
 
 ?>
 
