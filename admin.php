@@ -21,7 +21,8 @@
         <hr class="admin-hr">
         <ul class="admin-ul">
             <li class="admin-li"><a href="log.php" class="admin-li-a">Esemény lista</a></li>
-            <li class="admin-li"><a href="register.php" class="admin-li-a">Segítő regisztrálása</a></li>
+            <li class="admin-li"><a href="register.php" class="admin-li-a">Felhasználó regisztrálása</a></li>
+            <li class="admin-li"><a href="users.php" class="admin-li-a">Felhasználók listája</a></li>
             <li class="admin-li"><a href="hashgen.php" class="admin-li-a">Kódok generálása</a></li>
             <li class="admin-li"><a href="hashexport.php" class="admin-li-a">Kódok exportálása</a></li>
         </ul>

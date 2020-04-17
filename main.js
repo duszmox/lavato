@@ -48,7 +48,7 @@ function successfulVote() {
     confirmButtonText: "Ok"
   }).then(result => {
     if (result.value) {
-      window.location.href = "vote.php";
+      window.location.href = "index.php";
     }
   });
 }
@@ -117,7 +117,7 @@ function successfulCodeGen($number) {
     confirmButtonText: "Ok"
   }).then(result => {
     if (result.value) {
-      window.location.replace("/lavato/hashgen.php");
+      window.location.replace("/lavato/admin.php");
     }
   });
 }
