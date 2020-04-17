@@ -6,18 +6,19 @@ if (!is_admin()) {
 };
 if (isset($_POST["passwordChange"])) {
     
-    
+    $_SESSION["temp_userchange"] = $_POST["username"];
     
     ?>
     <script>
         Swal.fire({
             title: 'Credentials',
-            html: '<input type="password" id="password1" class="swal2-input" placeholder="Enter new password"></input>' +
+            html: '<input type="hidden" name="username" id="username" value="<?php echo $_POST["username"]?>"><input type="password" id="password1" class="swal2-input" placeholder="Enter new password"></input>' +
             '<input type="password" id="password2" class="swal2-input" placeholder="Enter new password again"></input>',
             confirmButtonText: 'Login',
             preConfirm: () => {
-                let password1 = Swal.getPopup().querySelector('#password1').value
-                let password2 = Swal.getPopup().querySelector('#password2').value
+                let password1 = Swal.getPopup().querySelector('#password1').value;
+                let password2 = Swal.getPopup().querySelector('#password2').value;
+                let username = Swal.getPopup().querySelector("#username").value;
                 if (password1 === '' || password2 === '') {
                     Swal.showValidationMessage(`You have to fill both of the forms!`)
                 }
@@ -25,14 +26,16 @@ if (isset($_POST["passwordChange"])) {
                     Swal.showValidationMessage(`Password confirmation doesn't match the password`)
                 }
                 return {
-                    password1: password1,
-                    password2: password2
+                    "password1": password1,
+                    "password2": password2,
+                    "username" : username
                 }
             }
         }).then((result) => {
             let data = {
-                password1: "password1",
-                password2: "password2"
+                "password1": password1,
+                "password2": password2,
+                "username":username
             };
             $.ajax({
                 type: "POST",
@@ -43,10 +46,9 @@ if (isset($_POST["passwordChange"])) {
         </script>
 <?php
 }
-$changePassUser = $_POST["username"];
 
 if (isset($_POST["password1"]) && isset($_POST["password2"])) {
-    change_user_password($changePassUser, $_POST["password1"]);
+    change_user_password($_SESSION["temp_userchange"], $_POST["password1"]);
 }
 
 
