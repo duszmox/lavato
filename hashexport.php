@@ -2,10 +2,15 @@
 require_once("snippets.php");
 require_once("navbar.php");
 displayErrors();
-
+$number_of_rows = get_hash_row_number();
 if (!is_admin()) {
     goBack();
-} ?>
+} 
+if ($number_of_rows < 1) {
+    no_hashes_detected_export();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

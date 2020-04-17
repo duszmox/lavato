@@ -45,7 +45,7 @@
             if (user_logged_in()) {
             ?>
                 <li class="nav-item active">
-                    <a class="nav-link" href="logout.php">Kijelentkezés<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="logout.php">Kijelentkezés (<?php echo $_SESSION['username']; ?>)<span class="sr-only">(current)</span></a>
                 </li>
             <?php
 

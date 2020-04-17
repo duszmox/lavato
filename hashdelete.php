@@ -1,10 +1,15 @@
 <?php 
 require_once('snippets.php');
 require_once('navbar.php');
+$number_of_rows = get_hash_row_number();
 if(! is_admin()) {
     goBack();
 } else if ($_POST['delete']) {
-    delete_hashes();
+    if ($number_of_rows < 1) {
+        no_hashes_detected();
+    } else if ($number_of_rows >= 1) {
+        delete_hashes();        
+    }
 }
 ?>
 <!DOCTYPE html>

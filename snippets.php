@@ -206,11 +206,11 @@ function register_user($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-        ?> 
+?>
         <script>
             alreadyUsedUsername()
         </script>
-        <?php
+    <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password) VALUES ('$username', '" . hash("sha256", $password) . "')";
@@ -222,16 +222,24 @@ function register_admin($username, $password)
 
     global $conn;
     if (!empty(get_userdata($username))) {
-        ?> 
+    ?>
         <script>
             alreadyUsedUsername()
         </script>
-        <?php
+    <?php
         return false;
     }
     $sql = "INSERT INTO lavato_users (username, password, admin) VALUES ('$username', '" . hash("sha256", $password) . "', '1')";
     log_action("register_user", $username);
     return mysqli_query($conn, $sql);
+}
+function is_admin_table() {
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = 'SELECT username, id FROM lavato_users';
+    $retval = mysqli_query($conn, $sql);
 }
 
 function get_log()
@@ -243,12 +251,43 @@ function get_log()
     $sql = 'SELECT action, value, date, id FROM lavato_log';
     $retval = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
-?>
+    ?>
         <tr>
             <th scope="row"><?php echo "{$row['id']}" ?></th>
             <td><?php echo "{$row['action']}" ?> </td>
             <td> <?php echo "{$row['value']}" ?></td>
             <td> <?php echo "{$row['date']}" ?></td>
+        </tr>
+    <?php
+    }
+}
+function get_users()
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = 'SELECT username, password, id, admin FROM lavato_users';
+    $retval = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+    ?>
+        <tr>
+            <th scope="row"> <p><?php echo "{$row['id']}" ?></p> </th>
+            <td> <p><?php echo "{$row['username']}" ?></p>  </td>
+            <td> <p><?php if ($row['admin'] == "1") {
+                echo "Igen";
+            } else {
+                echo "Nem";
+            }?></p></td>
+            <td>
+                <input type="submit" name="password" class="btn btn-warning" value="Jelszó megváltoztatása">
+                <?php if ($row["admin"] != "1") {
+                    echo '<input type="submit" name="makeAdmin" class="btn btn-dark" value="Adminná tétel">';
+                } else {
+                    echo '<input type="submit" name="deleteAdmin" class="btn btn-dark" value="Admin jog törlése">';
+                } ?>
+                <input type="submit" class="btn btn-danger" name="delete" value="Felhasználó törlése">
+            </td>
         </tr>
     <?php
     }
@@ -307,14 +346,14 @@ function merge_two_photos($qr_code_url, $background_url, $i)
 {
     $dest = imagecreatefrompng($background_url);
     $src = imagecreatefrompng($qr_code_url);
-    
-    
+
+
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
 
-    imagecopymerge($dest, $src, 45, 40, 0, 0, 375, 375, 100); 
+    imagecopymerge($dest, $src, 45, 40, 0, 0, 375, 375, 100);
 
-    
+
     imagedestroy($src);
 
     ob_start();
@@ -325,7 +364,6 @@ function merge_two_photos($qr_code_url, $background_url, $i)
     $file = "final_images/QR-Code-" . $i . ".png";
     file_put_contents($file, $image_data);
     return true;
-
 }
 function download_folder_in_zip($folder)
 {
@@ -334,8 +372,8 @@ function download_folder_in_zip($folder)
     if ($zip->open('codes.zip', ZipArchive::OVERWRITE) === TRUE) {
         if ($handle = opendir($folder)) {
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir($folder.'/' . $entry)) {
-                    $zip->addFile($folder.'/' . $entry);
+                if ($entry != "." && $entry != ".." && !is_dir($folder . '/' . $entry)) {
+                    $zip->addFile($folder . '/' . $entry);
                 }
             }
             closedir($handle);
@@ -439,7 +477,7 @@ function delete_hashes()
                             icon: 'success',
                             confirmButtonText: 'Rendben'
                         })
-                    } else if (! result.value == "1492") {
+                    } else if (!result.value == "1492") {
                         Swal.fire({
                             title: 'Helytelen választ írtál be!',
                             text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
@@ -455,5 +493,33 @@ function delete_hashes()
 
 
 
+<?php
+}
+function no_hashes_detected()
+{
+?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Hupsz...',
+            text: 'Egy kód sincs a rendszerben',
+        })
+    </script>
+<?php
+}
+function no_hashes_detected_export()
+{
+?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Egy kód sincs a rendszerben',
+            text: 'Generálj, pár kódot, hogy ki tudd exportálni őket!',
+        }).then((result) => {
+            if (result.value) {
+                window.history.back();
+            }
+        })
+    </script>
 <?php
 }
