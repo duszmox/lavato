@@ -8,8 +8,8 @@ function notRealCode() {
     icon: "error",
     html: "Nézd meg, nem-e ütötted el, vagy használj másik kódot!",
     focusConfirm: false,
-    confirmButtonText: "Vissza"
-  }).then(result => {
+    confirmButtonText: "Vissza",
+  }).then((result) => {
     if (result.value) {
       window.location.href = "vote.php";
     }
@@ -30,8 +30,8 @@ function confirmVote(i, cond = false, hash) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     cancelButtonText: "Nem, mégsem",
-    confirmButtonText: "Igen, biztos"
-  }).then(result => {
+    confirmButtonText: "Igen, biztos",
+  }).then((result) => {
     if (result.value) {
       window.location.href =
         "/lavato/upload_vote.php?hash=" + hash + "&class=" + i;
@@ -45,8 +45,8 @@ function successfulVote() {
     icon: "success",
     html: "Szavazatod elmentésre került",
     focusConfirm: false,
-    confirmButtonText: "Ok"
-  }).then(result => {
+    confirmButtonText: "Ok",
+  }).then((result) => {
     if (result.value) {
       window.location.href = "index.php";
     }
@@ -59,23 +59,22 @@ function codeAlreadyActivated() {
     icon: "error",
     html: "Ezt a kódot már egyszer beolvasta valaki.",
     focusConfirm: false,
-    confirmButtonText: "Vissza"
-  }).then(result => {
+    confirmButtonText: "Vissza",
+  }).then((result) => {
     if (result.value) {
       window.location.href = "vote.php";
     }
   });
 }
 
-  
 function successfulLogin() {
   Swal.fire({
     title: "Sikeresen bejelentkeztél",
     text: "",
     icon: "success",
     confirmButtonColor: "#28a745",
-    confirmButtonText: "Ok"
-  }).then(result => {
+    confirmButtonText: "Ok",
+  }).then((result) => {
     if (result.value) {
       window.location.replace("/lavato/");
     }
@@ -87,7 +86,7 @@ function cannotLogin() {
     text: "Hibás felhasználónév vagy jelszó! Próbáld újra!",
     icon: "error",
     confirmButtonColor: "#28a745",
-    confirmButtonText: "Ok"
+    confirmButtonText: "Ok",
   });
 }
 function alreadyUsedUsername() {
@@ -96,35 +95,36 @@ function alreadyUsedUsername() {
     text: "Nem sikerült regisztrálni, mert már van ilyen felhasználó",
     icon: "error",
     confirmButtonColor: "#28a745",
-    confirmButtonText: "Ok"
+    confirmButtonText: "Ok",
   });
 }
 function successfulRegistration() {
-    Swal.fire({
-      title: "Sikeresen regisztráltál egy új felasználót",
-      text: "",
-      icon: "success",
-      confirmButtonColor: "#28a745",
-      confirmButtonText: "Ok"
-    })
-}
-function successfulCodeGen($number) {
   Swal.fire({
-    title: "Sikeresen legeneráltál "+$number+" kódot!",
+    title: "Sikeresen regisztráltál egy új felasználót",
     text: "",
     icon: "success",
     confirmButtonColor: "#28a745",
-    confirmButtonText: "Ok"
-  }).then(result => {
+    confirmButtonText: "Ok",
+  });
+}
+function successfulCodeGen($number) {
+  Swal.fire({
+    title: "Sikeresen legeneráltál " + $number + " kódot!",
+    text: "",
+    icon: "success",
+    confirmButtonColor: "#28a745",
+    confirmButtonText: "Ok",
+  }).then((result) => {
     if (result.value) {
       window.location.replace("/lavato/admin.php");
     }
   });
 }
-function wait(ms)
-{
-var d = new Date();
-var d2 = null;
-do { d2 = new Date(); }
-while(d2-d < ms);
+function wait(ms) {
+  var d = new Date();
+  var d2 = null;
+  do {
+    d2 = new Date();
+  } while (d2 - d < ms);
 }
+

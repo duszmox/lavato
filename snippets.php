@@ -1,3 +1,6 @@
+<head>
+    <script src="main.js"></script>
+</head>
 <?php
 require_once("connect.php");
 function html_escape($html_escape)
@@ -91,11 +94,6 @@ function get_class_votes()
                 break;
         }
     }
-
-
-
-
-
     return $class_data;
 }
 
@@ -103,23 +101,11 @@ function gen_uuid()
 {
     return sprintf(
         '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        // 32 bits for "time_low"
         mt_rand(0, 0xffff),
         mt_rand(0, 0xffff),
-
-        // 16 bits for "time_mid"
         mt_rand(0, 0xffff),
-
-        // 16 bits for "time_hi_and_version",
-        // four most significant bits holds version number 4
         mt_rand(0, 0x0fff) | 0x4000,
-
-        // 16 bits, 8 bits for "clk_seq_hi_res",
-        // 8 bits for "clk_seq_low",
-        // two most significant bits holds zero and one for variant DCE1.1
         mt_rand(0, 0x3fff) | 0x8000,
-
-        // 48 bits for "node"
         mt_rand(0, 0xffff),
         mt_rand(0, 0xffff),
         mt_rand(0, 0xffff)
@@ -233,7 +219,8 @@ function register_admin($username, $password)
     log_action("register_user", $username);
     return mysqli_query($conn, $sql);
 }
-function is_admin_table() {
+function is_admin_table()
+{
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
@@ -272,21 +259,30 @@ function get_users()
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
     ?>
         <tr>
-            <th scope="row"> <p><?php echo "{$row['id']}" ?></p> </th>
-            <td> <p><?php echo "{$row['username']}" ?></p>  </td>
-            <td> <p><?php if ($row['admin'] == "1") {
-                echo "Igen";
-            } else {
-                echo "Nem";
-            }?></p></td>
+            <th scope="row">
+                <p><?php echo "{$row['id']}" ?></p>
+            </th>
             <td>
-                <input type="submit" name="password" class="btn btn-warning" value="Jelszó megváltoztatása">
-                <?php if ($row["admin"] != "1") {
-                    echo '<input type="submit" name="makeAdmin" class="btn btn-dark" value="Adminná tétel">';
-                } else {
-                    echo '<input type="submit" name="deleteAdmin" class="btn btn-dark" value="Admin jog törlése">';
-                } ?>
-                <input type="submit" class="btn btn-danger" name="delete" value="Felhasználó törlése">
+                <p><?php echo "{$row['username']}" ?></p>
+            </td>
+            <td>
+                <p><?php if ($row['admin'] == "1") {
+                        echo "Igen";
+                    } else {
+                        echo "Nem";
+                    } ?></p>
+            </td>
+            <td>
+                <form action="users.php" method="POST">
+                    <input type="text" name="username" value="<?php echo "{$row['username']}" ?>" style="display: none">
+                    <input type="submit" name="passwordChange" class="btn btn-warning" value="Jelszó megváltoztatása">
+                    <?php if ($row["admin"] != "1") {
+                        echo '<input type="submit" name="makeAdmin" class="btn btn-dark" value="Adminná tétel">';
+                    } else {
+                        echo '<input type="submit" name="deleteAdmin" class="btn btn-dark" value="Admin jog törlése">';
+                    } ?>
+                    <input type="submit" class="btn btn-danger" name="deleteUser" value="Felhasználó törlése">
+                </form>
             </td>
         </tr>
     <?php
@@ -470,7 +466,7 @@ function delete_hashes()
                         global $conn;
                         $sql = 'TRUNCATE TABLE lavato_keys';
                         mysqli_query($conn, $sql);
-                        log_action("Delete hashes", $_SESSION['username'])
+                        log_action("deleted_hashes", $_SESSION['username'])
                         ?>
                         Swal.fire({
                             title: 'Sikeresen kitörölted a kódokat',
@@ -522,4 +518,13 @@ function no_hashes_detected_export()
         })
     </script>
 <?php
+}
+function change_user_password($username, $password) {
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_users SET password='" . hash("sha256", $password) . "' WHERE username='$username' ";
+    return mysqli_query($conn, $sql);
+    
 }

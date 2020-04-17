@@ -3,8 +3,15 @@ require_once("snippets.php");
 require_once("navbar.php");
 if (!is_admin()) {
     goBack();
-
 };
+if ($_POST["passwordChange"]) {
+?>
+    <script>
+        
+    </script>
+<?php
+}
+
 ?>
 
 
@@ -15,8 +22,6 @@ if (!is_admin()) {
     <script src="assets/js/jquery-3.3.1.js"></script>
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-
-
 </head>
 <script>
     $(document).ready(function() {
@@ -27,7 +32,7 @@ if (!is_admin()) {
     <h1 class="register-h1">Felhasználók</h1>
     <hr class="register-hr">
     <div class="log-table">
-        <table id="usersTable" class="table table-striped table-bordered" >
+        <table id="usersTable" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th class="th-sm">id</th>

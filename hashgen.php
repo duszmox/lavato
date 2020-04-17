@@ -8,6 +8,8 @@ else if (isset($_POST['submit']) && $_POST['submit'] == "Generálás") {
     if (isset($_POST['max-character'])) {
         $number = html_escape($_POST['max-character']);
         if (create_random_data($number, '0', '0')) {
+            $action = "generated_" . $number . "_codes";
+            log_action($action, $_SESSION["username"]);
             ?>
             <script>successfulCodeGen(<?php echo $number?>)</script>
             <?php
