@@ -1,6 +1,6 @@
 <?php 
 if ($_POST['submit']) {
-    require_once("connect.php");
+    require_once("snippets.php");
     global $conn;
     $sql = "SELECT `id`,`hash` FROM `lavato_keys`";
     header("Content-Disposition: attachment; filename=tables.xls");
@@ -14,6 +14,7 @@ if ($_POST['submit']) {
         }
         echo implode("\t", array_values($row)) . "\r\n";
     }
+    log_action("exported_codes_to_excel", $_SESSION["username"]);
 }
 
 

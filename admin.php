@@ -20,16 +20,14 @@
         <h1 class="admin-h1">Admin</h1>
         <hr class="admin-hr">
         <ul class="admin-ul">
-            <li class="admin-li"><a href="log.php" class="admin-li-a">Esemény lista</a></li>
+            <li class="admin-li"><a href="log.php" class="admin-li-a">Esemény lista</a></li> <br>
             <li class="admin-li"><a href="register.php" class="admin-li-a">Felhasználó regisztrálása</a></li>
-            <li class="admin-li"><a href="users.php" class="admin-li-a">Felhasználók listája</a></li>
+            <li class="admin-li"><a href="users.php" class="admin-li-a">Felhasználók listája</a></li><br>
             <li class="admin-li"><a href="hashgen.php" class="admin-li-a">Kódok generálása</a></li>
             <li class="admin-li"><a href="hashexport.php" class="admin-li-a">Kódok exportálása</a></li>
+            <li class="admin-li"><a href="hashdelete.php" class="admin-li-a">Kódok törlése</a> - <p class="admin-li-delete-p">Szigorúan csak az esemény után!</p></li>
         </ul>
-        <h3 class="admin-h3">Szigorúan csak az esemény után!</h3>
-        <ul class="admin-ul">
-            <li class="admin-li"><a href="hashdelete.php" class="admin-li-a">Kódok törlése</a></li>
-        </ul>
+
 
 
 

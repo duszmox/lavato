@@ -8,6 +8,7 @@ if (!is_admin()) {
 } else if (isset($_GET["url"])) {
 
     global $conn;
+    log_action("exported_codes_to_cards", $_SESSION["username"]);
     $data = get_hashes_from_database("lavato_keys", "hash", $conn);
     $i = 1;
     $background_url = "../assets/png/background.png";

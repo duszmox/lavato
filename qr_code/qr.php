@@ -22,4 +22,6 @@ if (!is_admin()) {
         unlink($zipFile);
         delete_files("qr_codes/");
     }
+    log_action("exported_codes_to_qr_codes", $_SESSION["username"]);
+
 }
