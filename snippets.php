@@ -1,6 +1,3 @@
-<head>
-    <script src="main.js"></script>
-</head>
 <?php
 require_once("connect.php");
 function html_escape($html_escape)

@@ -5,15 +5,15 @@ if (!is_admin()) {
     goBack();
 };
 if (isset($_POST["passwordChange"])) {
-    
+
     $_SESSION["temp_userchange"] = $_POST["username"];
-    
-    ?>
+
+?>
     <script>
         Swal.fire({
             title: 'Credentials',
-            html: '<input type="hidden" name="username" id="username" value="<?php echo $_POST["username"]?>"><input type="password" id="password1" class="swal2-input" placeholder="Enter new password"></input>' +
-            '<input type="password" id="password2" class="swal2-input" placeholder="Enter new password again"></input>',
+            html: '<input type="hidden" name="username" id="username" value="<?php echo $_POST["username"] ?>"><input type="password" id="password1" class="swal2-input" placeholder="Enter new password"></input>' +
+                '<input type="password" id="password2" class="swal2-input" placeholder="Enter new password again"></input>',
             confirmButtonText: 'Login',
             preConfirm: () => {
                 let password1 = Swal.getPopup().querySelector('#password1').value;
@@ -25,30 +25,29 @@ if (isset($_POST["passwordChange"])) {
                 if (password1 !== password2) {
                     Swal.showValidationMessage(`Password confirmation doesn't match the password`)
                 }
-                return {
+
+                let data = {
                     "password1": password1,
                     "password2": password2,
-                    "username" : username
-                }
+                    "username": username
+                };
+                $.ajax({
+                    type: "POST",
+                    url: 'users.php',
+                    data: {
+                        json: JSON.stringify(data)
+                    },
+                })
             }
-        }).then((result) => {
-            let data = {
-                "password1": password1,
-                "password2": password2,
-                "username":username
-            };
-            $.ajax({
-                type: "POST",
-                url: 'users.php',
-                data: JSON.stringify(data),
-            });
         })
-        </script>
+    </script>
 <?php
 }
 
-if (isset($_POST["password1"]) && isset($_POST["password2"])) {
-    change_user_password($_SESSION["temp_userchange"], $_POST["password1"]);
+if (isset($_POST["json"])) {
+    echo "asd";
+    $json = json_decode($_POST["json"], true);
+    change_user_password($json["username"], $json["password1"]);
 }
 
 
