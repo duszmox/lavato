@@ -14,7 +14,9 @@ else if (isset($_POST['submit']) && $_POST['submit'] == "Generálás") {
             <script>successfulCodeGen(<?php echo $number?>)</script>
             <?php
         }
-    } 
+    } else {
+
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -33,7 +35,7 @@ else if (isset($_POST['submit']) && $_POST['submit'] == "Generálás") {
         <div class="form-group login-form">
             <form action="hashgen.php" method="POST">
                 <label for="max-character"><strong>Generálandó kódot száma:</strong></label>
-                <input type="number" class="form-control" placeholder="Generálandó kódok száma" name="max-character" max="750" min="1" id="max-character"> 
+                <input type="number" class="form-control" placeholder="Generálandó kódok száma" name="max-character" max="750" min="1" id="max-character" required> 
                 <input type="submit" class="btn hash-submit-button btn-primary" name="submit" value="Generálás">
             </form>
         </div>

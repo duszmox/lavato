@@ -38,6 +38,8 @@
                     }
                 }
                   
+            } else {
+                not_same_password();
             }
         }
     }
