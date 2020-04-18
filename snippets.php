@@ -516,12 +516,24 @@ function no_hashes_detected_export()
     </script>
 <?php
 }
-function change_user_password($username, $password) {
+function change_user_password($username, $password)
+{
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
     }
     $sql = "UPDATE lavato_users SET password='" . hash("sha256", $password) . "' WHERE username='$username' ";
     return mysqli_query($conn, $sql);
-    
+}
+function not_same_password()
+{
+?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'A két jelszó nem ugyanaz!',
+            text: 'Próbáld újra!',
+        })
+    </script>
+<?php
 }
