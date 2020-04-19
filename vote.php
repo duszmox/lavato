@@ -37,7 +37,8 @@ display_errors();
     <script src="assets/js/sweetalert2@9.js"></script>
     <?php
     if (isset($_GET['hash'])) {
-
+        if (is_vote_open() == 1) {
+            
         $hash = html_escape($_GET['hash']);
 
 
@@ -64,7 +65,7 @@ display_errors();
                     </div>
                 </div>
             </div> <?php
-                } elseif (verify_hash($hash)) {
+                } else if (verify_hash($hash)) {
 
                     if (!hasBeenActivated($hash)) {
                     ?><script>
@@ -104,6 +105,30 @@ display_errors();
         <?php
                     }
                 }
+        } else {
+            
+            require_once("navbar.php");
+
+    ?>
+            <script> vote_is_not_open() </script>
+            <div class="main-container container">
+                <div class="code-padding">
+                    <h1 class="vote-h1">Szavazás</h1>
+                    <div class="code-box">
+                        <form id="code-form">
+                            <div class="form-group" id="form-group">
+                                <label for="exampleInputEmail1">Kód:</label>
+                                <input type="text" class="form-control" name="hash" id="hash" placeholder="Írd be a kódod" onkeyup="this.value = this.value.toLowerCase();">
+                                <small id="emailHelp" class="form-text text-muted">A Szavazó lapkán található kódot írd be ide, vagy
+                                    olvasd be a QR code-ot!
+                                </small>
+                            </div>
+                            <input type="submit" class="btn btn-primary" id="btn" value="Beküldés">
+                        </form>
+                    </div>
+                </div>
+            </div> <?php
+        }
             } else {
 
                 require_once("navbar.php");

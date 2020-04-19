@@ -58,8 +58,11 @@ body {
 
 @media (min-width: 700px) {
   .container-title-h1 {
-    font-size: 3.5vw;
+    font-size: 2vw;
     word-break: normal;
+  } 
+  .container-title-hr {
+    width: 31vw;
   }
   .login-div-form {
     width: 25vw;
@@ -91,7 +94,7 @@ body {
 }
 @media (max-width: 700px) {
   .container-title-h1 {
-    font-size: 8vw;
+    font-size: 6vw;
     word-break: normal;
   }
   .login-div-form {

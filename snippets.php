@@ -127,7 +127,7 @@ function create_random_data($max, $hasBeenActivated, $classes)
         $token = gen_uuid();
         $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated, class) VALUES ('$token', '$hasBeenActivated' ,'$classes')";
         mysqli_query($conn, $sql);
-        if (get_hash_row_number() >= 750) {
+        if (get_hash_row_number() >= 600) {
             break;
         }
         //todo ellenorize, hogy van-e mar ilyen hash
@@ -566,8 +566,8 @@ function delete_user($username)
 function max_number()
 {
     $num_rows = get_hash_row_number();
-    if ($num_rows <= 750 || $num_rows == 0) {
-        return $final_number = 750 - $num_rows;
+    if ($num_rows <= 600 || $num_rows == 0) {
+        return $final_number = 600 - $num_rows;
     } else {
         return $final_number = 0;
     }
@@ -588,4 +588,30 @@ function already_max_codes()
         });
     </script>
 <?php
+}
+function is_vote_open() {
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "SELECT is_vote_open, id FROM lavato_general WHERE id = '1'";
+    $retval = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
+    return $row["is_vote_open"];
+}
+function open_vote() {
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_general SET is_vote_open = 1 WHERE id = '1'";
+    $retval = mysqli_query($conn, $sql);
+}
+function close_vote() {
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_general SET is_vote_open = 0 WHERE id = '1'";
+    $retval = mysqli_query($conn, $sql);
 }
