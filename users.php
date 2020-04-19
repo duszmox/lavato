@@ -50,6 +50,17 @@ if (isset($_POST["json"])) {
     change_user_password($json["username"], $json["password1"]);
 }
 
+if (isset($_POST["adminRightChanger"])) {
+    $is_admin = is_admin_table($_POST["username"]);
+    if ($is_admin == 0) {
+        make_admin($_POST["username"]);
+    } else {
+        remove_admin($_POST["username"]);
+    }
+}
+if (isset($_POST["deleteUser"])) {
+    delete_user($_POST["username"]);
+}
 
 ?>
 

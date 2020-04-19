@@ -110,6 +110,14 @@ function gen_uuid()
 }
 
 
+function get_hash_row_number()
+{
+    global $conn;
+    $sql = "SELECT * from lavato_keys";
+    $result = mysqli_query($conn, $sql);
+    $num_rows = mysqli_num_rows($result);
+    return $num_rows;
+}
 function create_random_data($max, $hasBeenActivated, $classes)
 {
     global $conn;
@@ -119,6 +127,9 @@ function create_random_data($max, $hasBeenActivated, $classes)
         $token = gen_uuid();
         $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated, class) VALUES ('$token', '$hasBeenActivated' ,'$classes')";
         mysqli_query($conn, $sql);
+        if (get_hash_row_number() >= 750) {
+            break;
+        }
         //todo ellenorize, hogy van-e mar ilyen hash
 
     }
@@ -216,14 +227,16 @@ function register_admin($username, $password)
     log_action("register_user", $username);
     return mysqli_query($conn, $sql);
 }
-function is_admin_table()
+function is_admin_table($username)
 {
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
     }
-    $sql = 'SELECT username, id FROM lavato_users';
+    $sql = "SELECT username, id, admin FROM lavato_users WHERE username='$username'";
     $retval = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
+    return $row["admin"];
 }
 
 function get_log()
@@ -274,9 +287,9 @@ function get_users()
                     <input type="hidden" name="username" value="<?php echo "{$row['username']}" ?>">
                     <input type="submit" name="passwordChange" class="btn btn-warning" value="Jelszó megváltoztatása">
                     <?php if ($row["admin"] != "1") {
-                        echo '<input type="submit" name="makeAdmin" class="btn btn-dark" value="Adminná tétel">';
+                        echo '<input type="submit" name="adminRightChanger" class="btn btn-dark" value="Adminná tétel">';
                     } else {
-                        echo '<input type="submit" name="deleteAdmin" class="btn btn-dark" value="Admin jog törlése">';
+                        echo '<input type="submit" name="adminRightChanger" class="btn btn-dark" value="Admin jog törlése">';
                     } ?>
                     <input type="submit" class="btn btn-danger" name="deleteUser" value="Felhasználó törlése">
                 </form>
@@ -290,7 +303,7 @@ function goBack()
 {
     ?>
     <script>
-        window.history.back()
+        window.location.replace("login.php");
     </script>
 <?php
 }
@@ -324,7 +337,6 @@ function displayErrors()
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }
-
 function create_googlechart_from_url($url)
 {
     return "https://api.qrserver.com/v1/create-qr-code/?size=375x375&data=" . urlencode($url);
@@ -339,16 +351,10 @@ function merge_two_photos($qr_code_url, $background_url, $i)
 {
     $dest = imagecreatefrompng($background_url);
     $src = imagecreatefrompng($qr_code_url);
-
-
     imagealphablending($dest, false);
     imagesavealpha($dest, true);
-
     imagecopymerge($dest, $src, 45, 40, 0, 0, 375, 375, 100);
-
-
     imagedestroy($src);
-
     ob_start();
     header('Content-Type: image/png');
     imagepng($dest);
@@ -373,13 +379,11 @@ function download_folder_in_zip($folder)
         }
         $zip->close();
     }
-
     header('Content-Type: application/zip');
     header('Content-Disposition: attachment; filename=' . basename($zipFile));
     readfile($zipFile);
     return $zipFile;
 }
-
 function get_hashes_from_database($table, $column, $conn)
 {
     $sql = "SELECT $column FROM $table";
@@ -403,14 +407,6 @@ function delete_files($target)
         unlink($target);
     }
 }
-function get_hash_row_number()
-{
-    global $conn;
-    $sql = "SELECT * from lavato_keys";
-    $result = mysqli_query($conn, $sql);
-    $num_rows = mysqli_num_rows($result);
-    return $num_rows;
-}
 function old_download_folder_in_zip()
 {
     $zipFile = "codes.zip";
@@ -426,7 +422,6 @@ function old_download_folder_in_zip()
         }
         $zip->close();
     }
-
     header('Content-Type: application/zip');
     header('Content-Disposition: attachment; filename=' . basename($zipFile));
     readfile($zipFile);
@@ -469,7 +464,11 @@ function delete_hashes()
                             title: 'Sikeresen kitörölted a kódokat',
                             icon: 'success',
                             confirmButtonText: 'Rendben'
-                        })
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.replace("admin.php");
+                            }
+                        });
                     } else if (!result.value == "1492") {
                         Swal.fire({
                             title: 'Helytelen választ írtál be!',
@@ -482,10 +481,6 @@ function delete_hashes()
             }
         });
     </script>
-
-
-
-
 <?php
 }
 function no_hashes_detected()
@@ -496,7 +491,11 @@ function no_hashes_detected()
             icon: 'error',
             title: 'Hupsz...',
             text: 'Egy kód sincs a rendszerben',
-        })
+        }).then((result) => {
+            if (result.value) {
+                window.location.replace("admin.php");
+            }
+        });
     </script>
 <?php
 }
@@ -510,9 +509,9 @@ function no_hashes_detected_export()
             text: 'Generálj, pár kódot, hogy ki tudd exportálni őket!',
         }).then((result) => {
             if (result.value) {
-                window.history.back();
+                window.location.replace("admin.php");
             }
-        })
+        });
     </script>
 <?php
 }
@@ -534,6 +533,59 @@ function not_same_password()
             title: 'A két jelszó nem ugyanaz!',
             text: 'Próbáld újra!',
         })
+    </script>
+<?php
+}
+function make_admin($username)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_users SET admin = 1 WHERE username='$username' ";
+    return mysqli_query($conn, $sql);
+}
+function remove_admin($username)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_users SET admin = 0 WHERE username='$username' ";
+    return mysqli_query($conn, $sql);
+}
+function delete_user($username)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "DELETE FROM lavato_users WHERE username='$username'";
+    return mysqli_query($conn, $sql);
+}
+function max_number()
+{
+    $num_rows = get_hash_row_number();
+    if ($num_rows <= 750 || $num_rows == 0) {
+        return $final_number = 750 - $num_rows;
+    } else {
+        return $final_number = 0;
+    }
+    return $final_number;
+}
+function already_max_codes()
+{
+?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'A maximum számú kód le lett generálva már!',
+            text: 'Újabb generálás előtt töröld az előző kódokat!',
+        }).then((result) => {
+            if (result.value) {
+                window.location.replace("admin.php");
+            }
+        });
     </script>
 <?php
 }

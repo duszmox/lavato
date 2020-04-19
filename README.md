@@ -14,7 +14,7 @@ Alapjáraton az oldal domain címe [ludavato.fazekas.hu](https://ludavato.fazeka
 **7.** Nyisd meg az oldalt és látni fogod, hogy működik a home page és a szavazni is tudnál, ha lenne kódod.   
 **8.** Az url mögé írd be, hogy login és átkerülsz a bejelentkezési felületre! Itt az *admin*, *password* felhasználónév illetve jelszóval tudsz bejelentkezni.  
 **9.** Ha mindent jól csináltál, meg kell jelennie egy Admin, Helyezések és Kijelentkezés gombnak a felső sávban.  
-**10.** Utolsó lépésként változtasd meg a jelszavad az admin felületen, hogy ne tudják feltörni a rendszert!  
+**10.** Utolsó lépésként változtasd meg a jelszavad az admin felületen (Felhasználók kezelése), hogy ne tudják feltörni a rendszert!  
 
 
 ## Használat élesben
