@@ -21,7 +21,7 @@ Alapjáraton az oldal címe [ludavato.fazekas.hu](http://ludavato.fazekas.hu), v
 ## Használat élesben
 **1.** Először jeletkezz be a megadott felhasználó névvel és jelszóval  
 **2.** Ha ezt megtetted meg kell jelenjen egy Admin gomb a felső sávban. Kattints rá!  
-**3.** Kattints a kódok generálására, és generálj 500 kódot. (Maximum 750 lehetséges, mert utána nem lehet könnyen exportálni)  
+**3.** Kattints a kódok generálására, és generálj 500 kódot. (Maximum 600 lehetséges, mert utána nem lehet könnyen exportálni)  
 **4.** Ezután lépj egyet vissza és exportáld a kódokat kártyákra. Ne aggódj ez el fog tartani néhány percig, ne zárd be az ablakot!  
 **5.** Tömörítsd ki a zipfilet és nyomtasd ki a képeket A6-os méretben. (Ajánlott egy A4-es lapra többet is tenni)  
 
