@@ -127,4 +127,12 @@ function wait(ms) {
     d2 = new Date();
   } while (d2 - d < ms);
 }
-
+function vote_is_not_open() {
+  Swal.fire({
+    title: "Nincs megnyitva még a szavazás!",
+    text: "Várd meg amíg a szavazás megnyílik, utána oldvasd be mégegyszer a kódot!",
+    icon: "error",
+    confirmButtonColor: "#28a745",
+    confirmButtonText: "Ok",
+  }); 
+}

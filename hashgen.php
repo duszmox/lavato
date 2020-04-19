@@ -18,7 +18,7 @@ if (!is_admin()) {
     } else {
     }
 } else if (get_hash_row_number() == null) {
-} else if (get_hash_row_number() >= 750) {
+} else if (get_hash_row_number() >= 600) {
     already_max_codes();
 }
 ?>
