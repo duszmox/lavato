@@ -4,7 +4,7 @@ A küldönböző csalások elkerülése érdekében, a 2020-as évtől kezdve a 
 
 ## Telepítés
 
-Alapjáraton az oldal domain címe [ludavato.fazekas.hu](https://ludavato.fazekas.hu), viszont ha másik domain címre szeretnétek költöztetni a következő képpen tehetitek meg:  
+Alapjáraton az oldal címe [ludavato.fazekas.hu](http://ludavato.fazekas.hu), viszont ha másik domain címre szeretnétek költöztetni a következő képpen tehetitek meg:  
 **1.** Az oldal csak PHP Version 5.5.9-1ubuntu4.29 verzión lett tesztelve MySQL 8.0-ás adatbázis kezelővel, más verzión a működés nem garantált.  
 **2.** Töltsd le a source fájlokat a Github repositoryról, és helyezd el a szerveren egy mappában.  
 **3.** Nevezd át az *EDIT_THIS_connect.php* fájlt *connect.php*-ra.  
