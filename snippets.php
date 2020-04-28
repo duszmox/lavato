@@ -442,18 +442,6 @@ function delete_hashes()
             confirmButtonText: "Igen, biztos"
         }).then(result => {
             if (result.value) {
-                Swal.mixin({
-                    input: 'text',
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    cancelButtonText: "Mégsem",
-                    confirmButtonText: "Megerősítés"
-                }).queue([{
-                    title: 'Ahhoz hogy, megerősítsd döntésed, meg kell válaszolnod egy kérdést!',
-                    text: 'Mikor fedezte fel Kolombusz Kristóf Amerikát (évszám)?'
-                }, ]).then((result) => {
-                    if (result.value == "1492") {
                         <?php
                         global $conn;
                         $sql = 'TRUNCATE TABLE lavato_keys';
@@ -469,15 +457,6 @@ function delete_hashes()
                                 window.location.replace("admin.php");
                             }
                         });
-                    } else if (!result.value == "1492") {
-                        Swal.fire({
-                            title: 'Helytelen választ írtál be!',
-                            text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
-                            icon: 'error',
-                            confirmButtonText: 'Rendben'
-                        })
-                    }
-                })
             }
         });
     </script>
@@ -589,7 +568,8 @@ function already_max_codes()
     </script>
 <?php
 }
-function is_vote_open() {
+function is_vote_open()
+{
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
@@ -599,19 +579,49 @@ function is_vote_open() {
     $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
     return $row["is_vote_open"];
 }
-function open_vote() {
+function open_vote()
+{
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
     }
     $sql = "UPDATE lavato_general SET is_vote_open = 1 WHERE id = '1'";
     $retval = mysqli_query($conn, $sql);
+?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sikeresen megnyitottad a szavazást!',
+            text: '',
+        }).then((result) => {
+            if (result.value) {
+                window.location.replace("admin.php");
+            }
+        });
+    </script>
+
+<?php
 }
-function close_vote() {
+function close_vote()
+{
     global $conn;
     if (!$conn) {
         die('Could not connect: ' . $conn->connect_error());
     }
     $sql = "UPDATE lavato_general SET is_vote_open = 0 WHERE id = '1'";
     $retval = mysqli_query($conn, $sql);
+?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sikeresen lezártad a szavazást!',
+            text: '',
+        }).then((result) => {
+            if (result.value) {
+                window.location.replace("admin.php");
+            }
+        });
+    </script>
+
+<?php
 }

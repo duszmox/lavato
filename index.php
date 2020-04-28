@@ -17,17 +17,16 @@ require_once("snippets.php");
     <?php
     require_once("navbar.php")
     ?>
+    <div class="pageBody"></div>
 
+    <?php if (is_admin()) {
+        echo '<form method="post"><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Új Poszt</button> </form>';
+    } ?>
     <div class="container main-container">
         <div class="container-title">
             <br>
-            <h1  class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
+            <h1 class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
             <hr class="container-title-hr" align="left">
-            <?php if (is_admin()) {
-                echo '<form method="post"><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Új Poszt</button> </form>';
-            } ?>
-
-
         </div>
         <div class="container-body">
             <br>

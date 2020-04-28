@@ -36,9 +36,9 @@ if (user_logged_in()) {
         <form method="post" action="login.php" class="login-form">
             <div class="form-group login-form" id="form-group">
                 <label for="username" class="login-label-username"><strong>Felhasználónév:</strong></label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Username" onkeyup="this.value = this.value.toLowerCase();">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Felhasználónév..." onkeyup="this.value = this.value.toLowerCase();">
                 <label for="password" class="login-label-password"><strong>Jelszó:</strong> </label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Jelszó...">
                 <input type="submit" class="btn btn-primary login-submit-button" name="submit" value="Login">
             </div>
         </form>
