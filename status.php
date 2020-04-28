@@ -19,7 +19,9 @@
     <script>
         <?php
         require_once("snippets.php");
-        
+        if (!user_logged_in()) {
+            goBack();
+        }
         $data = get_class_votes();
         $data_pretty = get_class_votes();
 
@@ -64,8 +66,8 @@
         }
     </script>
     <script src="assets/js/canvasjs.min.js"></script>
-    <?php 
-    if(! user_logged_in()) {
+    <?php
+    if (!user_logged_in()) {
         goBack();
     }
     ?>
