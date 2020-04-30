@@ -17,24 +17,32 @@ require_once("snippets.php");
     <?php
     require_once("navbar.php")
     ?>
-    <div class="pageBody"></div>
+    <div class="pageBody main-container container">
+        <h1 class="index-main-h1">Hírek</h1>
+        <hr class="index-hr">
+        <?php if (is_admin()) {
+            echo '<form method="post"><button type="submit" class="btn btn-primary index-add-news"><i class="fa fa-plus"></i> Új Poszt</button> </form>';
+        } ?>
+        <div class="container index-news-container">
+            <div class="container-title">
+                <br>
+                <h1 class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
+                <hr class="container-title-hr" align="left">
+            </div>
+            <div class="container-body">
+                <br>
+                <p>A Fazekas Lúdavató rendszere a 2020-as eseménytől kezdve elektronikusan fog működni. Erre több indokból került sor, először is azért, hogy iskolánk haladjon a korral, modernizálódjuk, másrészt pedig azért is hogy így lecsökkentsük vagy teljesen megszüntessük a csalásokat.</p>
+                <br>
 
-    <?php if (is_admin()) {
-        echo '<form method="post"><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Új Poszt</button> </form>';
-    } ?>
-    <div class="container main-container">
-        <div class="container-title">
-            <br>
-            <h1 class="container-title-h1">Új szavazási rendszer a lúdavatón</h1>
-            <hr class="container-title-hr" align="left">
+            </div>
         </div>
-        <div class="container-body">
-            <br>
-            <p>A Fazekas Lúdavató rendszere a 2020-as eseménytől kezdve elektronikusan fog működni. Erre több indokból került sor, először is azért, hogy iskolánk haladjon a korral, modernizálódjuk, másrészt pedig azért is hogy így lecsökkentsük vagy teljesen megszüntessük a csalásokat.</p>
-            <br>
 
-        </div>
     </div>
+
+
+
+
+
 
 
 
