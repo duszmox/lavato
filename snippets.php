@@ -430,7 +430,7 @@ function old_download_folder_in_zip()
 function delete_hashes()
 {
 ?>
-    <script>
+     <script>
         Swal.fire({
             title: "Biztos ki szeretnéd törölni az összes kódot?",
             text: "Döntésedet nem tudod majd visszavonni!",
@@ -442,21 +442,28 @@ function delete_hashes()
             confirmButtonText: "Igen, biztos"
         }).then(result => {
             if (result.value) {
-                        <?php
-                        global $conn;
-                        $sql = 'TRUNCATE TABLE lavato_keys';
-                        mysqli_query($conn, $sql);
-                        log_action("deleted_hashes", $_SESSION['username'])
-                        ?>
+                Swal.mixin({
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Mégsem",
+                    confirmButtonText: "Megerősítés"
+                }).queue([{
+                    title: 'Ahhoz hogy, megerősítsd döntésed, meg kell válaszolnod egy kérdést!',
+                    text: 'Mikor fedezte fel Kolombusz Kristóf Amerikát (évszám)?'
+                }, ]).then((result) => {
+                    if (result.value == "1492") {
+                        window.location.href= "/lavato/hashdelete.php?delete=yes"
+                    } else if (!result.value == "1492") {
                         Swal.fire({
-                            title: 'Sikeresen kitörölted a kódokat',
-                            icon: 'success',
+                            title: 'Helytelen választ írtál be!',
+                            text: "Ha biztosan kiszeretnéd törölni a kódokat, próbáld újra!",
+                            icon: 'error',
                             confirmButtonText: 'Rendben'
-                        }).then((result) => {
-                            if (result.value) {
-                                window.location.replace("admin.php");
-                            }
-                        });
+                        })
+                    }
+                })
             }
         });
     </script>
