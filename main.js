@@ -33,8 +33,7 @@ function confirmVote(i, cond = false, hash) {
     confirmButtonText: "Igen, biztos",
   }).then((result) => {
     if (result.value) {
-      window.location.href =
-        "/lavato/upload_vote.php?hash=" + hash + "&class=" + i;
+      window.location.href = "upload_vote.php?hash=" + hash + "&class=" + i;
     }
   });
 }
@@ -76,7 +75,7 @@ function successfulLogin() {
     confirmButtonText: "Ok",
   }).then((result) => {
     if (result.value) {
-      window.location.replace("/lavato/");
+      window.location.replace("index.php");
     }
   });
 }
@@ -116,7 +115,7 @@ function successfulCodeGen($number) {
     confirmButtonText: "Ok",
   }).then((result) => {
     if (result.value) {
-      window.location.replace("/lavato/admin.php");
+      window.location.replace("admin.php");
     }
   });
 }
@@ -130,9 +129,23 @@ function wait(ms) {
 function vote_is_not_open() {
   Swal.fire({
     title: "Nincs megnyitva még a szavazás!",
-    text: "Várd meg amíg a szavazás megnyílik, utána oldvasd be mégegyszer a kódot!",
+    text:
+      "Várd meg amíg a szavazás megnyílik, utána oldvasd be mégegyszer a kódot!",
     icon: "error",
     confirmButtonColor: "#28a745",
     confirmButtonText: "Ok",
-  }); 
+  });
+}
+function successfulPostUpload() {
+  Swal.fire({
+    title: "Sikeresen közzétetted a hírt!",
+    text: "",
+    icon: "success",
+    confirmButtonColor: "#28a745",
+    confirmButtonText: "Ok",
+  }).then((result) => {
+    if (result.value) {
+      window.location.replace("index.php");
+    }
+  });
 }

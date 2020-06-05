@@ -102,7 +102,15 @@ if (isset($_POST["deleteUser"])) {
 </head>
 <script>
     $(document).ready(function() {
-        $('#usersTable').DataTable();
+        $('#usersTable').DataTable({
+            "bPaginate": false,
+            "sScrollX": "110%",
+            "sScrollY": "400px",
+            "bScrollCollapse": true,
+            "autoWidth": true,
+
+        });
+        $('.dataTables_filter').addClass('filter-css');
     });
 </script>
 <div class="main-container container">
@@ -112,13 +120,13 @@ if (isset($_POST["deleteUser"])) {
         Sikeresen megváltoztattad <?php echo $_POST["username"] ?> jelszavát!
     </div>
     <div class="log-table">
-        <table id="usersTable" class="table table-striped table-bordered">
+        <table id="usersTable" class="table table-striped table-bordered" style="max-width: none !important; width: 100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th class="th-sm">id</th>
-                    <th class="th-sm">Felhasználónév</th>
-                    <th class="th-sm">Admin</th>
-                    <th class="th-sm">Műveletek</th>
+                    <th class="th-sm style='white-space:nowarp'">id</th>
+                    <th class="th-sm" style='white-space:nowarp'>Felhasználónév</th>
+                    <th class="th-sm" style='white-space:nowarp'>Admin</th>
+                    <th class="th-sm" style='white-space:nowarp'>Műveletek</th>
                 </tr>
             </thead>
             <tbody>
