@@ -90,7 +90,7 @@ require_once("snippets.php");
         <h1 class="index-main-h1">Hírek</h1>
         <hr class="index-hr">
         <?php if (is_admin()) {
-            echo '<form method="post" action="newpost.php"><button type="submit" class="btn btn-primary index-add-news"><i class="fa fa-plus"></i> Új Poszt</button> <input type="text" value="new_post" name="for" hidden readonly> </form>';
+            echo '<form method="post" action="newpost.php"><button type="submit" class="btn btn-primary index-add-news"><i class="fa fa-plus"></i> Új Hír</button> <input type="text" value="new_post" name="for" hidden readonly> </form>';
         }
         get_posts();
 
