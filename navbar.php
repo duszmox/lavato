@@ -14,18 +14,26 @@
 <script src="assets/js/animated.js"></script>
 <script src="assets/js/sweetalert2@9.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand nav-title" href="/lavato/">LUDAVATO</a>
+    <a class="navbar-brand nav-title" href="index.php">LUDAVATO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/lavato/">Főoldal <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Főoldal <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="vote.php">Szavazás<span class="sr-only">(current)</span></a>
-            </li>
+
+            <?php
+            if (is_vote_open() == 1) {
+            ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="vote.php">Szavazás<span class="sr-only">(current)</span></a>
+                </li>
+            <?php
+
+            }
+            ?>
             <?php if (user_logged_in()) {
             ?>
                 <li class="nav-item active">

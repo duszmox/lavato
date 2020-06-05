@@ -272,17 +272,17 @@ function get_users()
             <th scope="row">
                 <p><?php echo "{$row['id']}" ?></p>
             </th>
-            <td>
+            <td style='white-space:nowarp'>
                 <p><?php echo "{$row['username']}" ?></p>
             </td>
-            <td>
+            <td style='white-space:nowarp'>
                 <p><?php if ($row['admin'] == "1") {
                         echo "Igen";
                     } else {
                         echo "Nem";
                     } ?></p>
             </td>
-            <td>
+            <td style='white-space:nowarp'>
                 <form action="users.php" method="POST">
                     <input type="hidden" name="username" value="<?php echo "{$row['username']}" ?>">
                     <input type="submit" name="passwordChange" class="btn btn-warning" value="Jelszó megváltoztatása">
@@ -430,7 +430,7 @@ function old_download_folder_in_zip()
 function delete_hashes()
 {
 ?>
-     <script>
+    <script>
         Swal.fire({
             title: "Biztos ki szeretnéd törölni az összes kódot?",
             text: "Döntésedet nem tudod majd visszavonni!",
@@ -454,7 +454,7 @@ function delete_hashes()
                     text: 'Mikor fedezte fel Kolombusz Kristóf Amerikát (évszám)?'
                 }, ]).then((result) => {
                     if (result.value == "1492") {
-                        window.location.href= "/lavato/hashdelete.php?delete=yes"
+                        window.location.href = "hashdelete.php?delete=yes"
                     } else if (!result.value == "1492") {
                         Swal.fire({
                             title: 'Helytelen választ írtál be!',
@@ -551,6 +551,7 @@ function delete_user($username)
 }
 function max_number()
 {
+    $final_number = 0;
     $num_rows = get_hash_row_number();
     if ($num_rows <= 600 || $num_rows == 0) {
         return $final_number = 600 - $num_rows;
@@ -630,5 +631,112 @@ function close_vote()
         });
     </script>
 
-<?php
+    <?php
 }
+function get_news_title_by_id($id)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "SELECT title FROM lavato_posts WHERE id = $id";
+    $retval = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
+    return $row["title"];
+}
+function get_news_content_by_id($id)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "SELECT content FROM lavato_posts WHERE id = $id";
+    $retval = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
+    return $row["content"];
+}
+function edit_post($id, $title, $content)
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "UPDATE lavato_posts SET title = '$title', content = '$content' WHERE id = $id";
+    mysqli_query($conn, $sql);
+}
+function get_posts()
+{
+    global $conn;
+    if (!$conn) {
+        die('Could not connect: ' . $conn->connect_error());
+    }
+    $sql = "SELECT title, upload_date, content, author, id FROM lavato_posts order by id desc";
+    $retval = mysqli_query($conn, $sql);
+    $num_rows = mysqli_num_rows($retval);
+    if ($num_rows > 0) {
+        while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+    ?>
+            <div class="index-news-outter-container">
+                <div class="container index-news-container">
+
+                    <div class="container-title">
+                        <br>
+                        <h1 class="container-title-h1" id="container-title-h1"><?php echo "{$row['title']}" ?></h1>
+                        <hr class="container-title-hr" id="container-title-hr" align="left">
+                    </div>
+                    <div class="container-body">
+                        <br>
+                        <p class="news-content-p"><?php echo $row["content"] ?></p>
+                        <br>
+                        <hr class="news-middle-hr">
+                        <div class="news-bottom-div">
+                            <div class="news-author-div">
+                                <p class="news-author-p">
+                                    By <?php echo $row["author"] ?>
+                                </p>
+                            </div>
+                            <?php
+                            if (is_admin()) {
+                            ?>
+                                <div class="news-admintools-div">
+                                    <form method="post" class="inline">
+                                        <input type="text" value="<?php echo $row["id"] ?>" name="id" hidden>
+                                        <button type="submit" name="delete" class="news-delete-btn"><span class="far fa-trash-alt news-admintools-delete"></span></button>
+                                    </form>
+                                    <form method="POST" class="inline">
+                                        <input type="text" value="<?php echo $row["id"] ?>" name="id" hidden>
+                                        <button type="submit" name="edit" class="news-edit-btn"><span class="far fa-edit news-admintools-edit"></span></button>
+                                    </form>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <div class="news-date-div">
+                                <p class="news-date-p">
+                                    Közzétéve: <?php echo $row["upload_date"] ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="news-bottom-hr">
+                </div>
+            </div>
+
+        <?php
+        }
+    } else {
+        ?> <div class="no-news-were-found">
+            <i class="far fa-newspaper no-news-icon"></i>
+            <p class="no-news-p" unselectable="on">Egy hír sincs még, <br> nézz vissza később...</p>
+        </div> <?php
+            }
+        }
+        function delete_post($id)
+        {
+            global $conn;
+            if (!$conn) {
+                die('Could not connect: ' . $conn->connect_error());
+            }
+            $sql = "DELETE FROM lavato_posts  WHERE id = $id";
+            $retval = mysqli_query($conn, $sql);
+        }
