@@ -11,7 +11,7 @@ Alapjáraton az oldal domain címe [ludavato.fazekas.hu](https://ludavato.fazeka
 **4.** Nevezd át az _EDIT_THIS_connect.php_ fájlt _connect.php_-ra.  
 **5.** Nyisd meg a fájlt és töltsd ki a megfelelő adatokkal a `servername`, `username`, `password`, `db` és `page_url` változókat. A `servername` változóhoz a mysql szerver ip címét kell megadni. A `username` és `password` változók a bejelentkezési adataid a szerverre. A `db` változó a database-t takarja amiben a tábláidat fogod tenni. Végül pedig a `page_url` az a változó aminek tartalmát bevisszük a böngészőbe a főoldalon találjuk magunkat (például: http://www.duszmo.f.fazekas.hu/lavato/) **Nagyon fontos, hogy az _index.php_ ne szerepeljen a címben és a _/_ jel szerepejen az urlben!**  
 **6.** Nyisd meg az adatbázis kezelőt és hozz létre egy új database-t. (A nevét írd be a `db` változóba mielőtt elfelejted)  
-**7.** Töltsd le az alább [sql fájlt](https://www.mediafire.com/file/d77gasu5vi5czqv/lavato.sql/file) és importáld be az adatbázisodba!  
+**7.** Töltsd le az alább [sql fájlt](https://www.mediafire.com/file/1gibxjf5ckhzifn/lavato.sql/file) és importáld be az adatbázisodba!  
 **8.** Nyisd meg az oldalt és látni fogod, hogy működik a home page és a szavazni is tudnál, ha lenne kódod.  
 **9.** Az url mögé írd be, hogy login és átkerülsz a bejelentkezési felületre! Itt az _admin_, _password_ felhasználónév illetve jelszóval tudsz bejelentkezni.  
 **10.** Ha mindent jól csináltál, meg kell jelennie egy Admin, Helyezések és Kijelentkezés gombnak a navigációs sávban.  
