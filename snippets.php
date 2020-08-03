@@ -122,11 +122,18 @@ function create_random_data($max, $hasBeenActivated, $classes)
 {
     global $conn;
     for ($i = 0; $i < $max; $i++) {
-        // $token = openssl_random_pseudo_bytes(32);
-        // $token = bin2hex($token);
+
         $token = gen_uuid();
-        $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated, class) VALUES ('$token', '$hasBeenActivated' ,'$classes')";
-        mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM lavato_keys WHERE hash='$token'";
+        $row = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($row) > 0) {
+            continue;
+        } else {
+            $sql = "INSERT INTO lavato_keys (hash, hasBeenActivated, class) VALUES ('$token', '$hasBeenActivated' ,'$classes')";
+            mysqli_query($conn, $sql);
+        }
+
+
         if (get_hash_row_number() >= 600) {
             break;
         }
@@ -230,9 +237,7 @@ function register_admin($username, $password)
 function is_admin_table($username)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "SELECT username, id, admin FROM lavato_users WHERE username='$username'";
     $retval = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
@@ -242,9 +247,7 @@ function is_admin_table($username)
 function get_log()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = 'SELECT action, value, date, id FROM lavato_log';
     $retval = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
@@ -261,9 +264,7 @@ function get_log()
 function get_users()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = 'SELECT username, password, id, admin FROM lavato_users';
     $retval = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
@@ -504,9 +505,7 @@ function no_hashes_detected_export()
 function change_user_password($username, $password)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_users SET password='" . hash("sha256", $password) . "' WHERE username='$username' ";
     return mysqli_query($conn, $sql);
 }
@@ -525,27 +524,21 @@ function not_same_password()
 function make_admin($username)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_users SET admin = 1 WHERE username='$username' ";
     return mysqli_query($conn, $sql);
 }
 function remove_admin($username)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_users SET admin = 0 WHERE username='$username' ";
     return mysqli_query($conn, $sql);
 }
 function delete_user($username)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "DELETE FROM lavato_users WHERE username='$username'";
     return mysqli_query($conn, $sql);
 }
@@ -579,9 +572,7 @@ function already_max_codes()
 function is_vote_open()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "SELECT is_vote_open, id FROM lavato_general WHERE id = '1'";
     $retval = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
@@ -590,9 +581,7 @@ function is_vote_open()
 function open_vote()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_general SET is_vote_open = 1 WHERE id = '1'";
     $retval = mysqli_query($conn, $sql);
 ?>
@@ -613,9 +602,7 @@ function open_vote()
 function close_vote()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_general SET is_vote_open = 0 WHERE id = '1'";
     $retval = mysqli_query($conn, $sql);
 ?>
@@ -636,9 +623,7 @@ function close_vote()
 function get_news_title_by_id($id)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "SELECT title FROM lavato_posts WHERE id = $id";
     $retval = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
@@ -647,9 +632,7 @@ function get_news_title_by_id($id)
 function get_news_content_by_id($id)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "SELECT content FROM lavato_posts WHERE id = $id";
     $retval = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($retval, MYSQLI_ASSOC);
@@ -658,18 +641,14 @@ function get_news_content_by_id($id)
 function edit_post($id, $title, $content)
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "UPDATE lavato_posts SET title = '$title', content = '$content' WHERE id = $id";
     mysqli_query($conn, $sql);
 }
 function get_posts()
 {
     global $conn;
-    if (!$conn) {
-        die('Could not connect: ' . $conn->connect_error());
-    }
+
     $sql = "SELECT title, upload_date, content, author, id FROM lavato_posts order by id desc";
     $retval = mysqli_query($conn, $sql);
     $num_rows = mysqli_num_rows($retval);
@@ -734,9 +713,6 @@ function get_posts()
         function delete_post($id)
         {
             global $conn;
-            if (!$conn) {
-                die('Could not connect: ' . $conn->connect_error());
-            }
             $sql = "DELETE FROM lavato_posts  WHERE id = $id";
             $retval = mysqli_query($conn, $sql);
         }
