@@ -427,3 +427,12 @@ i.index-news-menu-open:hover {
 #news-edit-content {
   min-height: 300px;
 }
+.current-pic-label {
+  padding-bottom: 20px;
+
+}
+.current-pic {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 300px;
+}

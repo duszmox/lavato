@@ -30,6 +30,7 @@
             <li class="admin-li"><a href="log.php" class="admin-li-a">Esemény lista</a></li> <br>
             <li class="admin-li"><a href="hashgen.php" class="admin-li-a">Kódok generálása</a></li>
             <li class="admin-li"><a href="hashexport.php" class="admin-li-a">Kódok exportálása</a></li>
+            <li class="admin-li"><a href="changecardbg.php" class="admin-li-a">Kártya háttérkép módósítása</a></li>
             <li class="admin-li"><a href="hashdelete.php" class="admin-li-a">Kódok törlése</a> - <p class="admin-li-delete-p">Szigorúan csak az esemény után!</p>
             </li>
         </ul>
