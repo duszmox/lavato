@@ -34,7 +34,7 @@ if (isset($_POST['upload'])) {
         <h1 class="hashexport-h1">Kártya háttérkép módosítás</h1>
         <hr class="hashexport-hr">
         <div class="hash-export-div">
-            <p class="hash-export-label">Az új háttérképen a 375x375 pixel nagy QR kód jobb felső sarka a háttérkép bal sarkától 375-375 pixelre fog megjelenni, ahogy az első háttérképen is látszik</p> <br> <br>
+            <p class="hash-export-label">Az új háttérképen a 375x375 pixel nagy QR kód jobb alsó sarka a háttérkép bal sarkától 375-375 pixelre fog megjelenni, ahogy az első háttérképen is látszik</p> <br> <br>
         <label class="hash-export-label currect-pic-label">Jelenlegi kép:</label> <br>
         <img src="assets/png/background.png" class="current-pic" alt=""> <br>
     
